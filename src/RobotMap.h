@@ -1,27 +1,36 @@
-const float kp = 0, ki = 0, kd = 0;
+#ifndef ROBOTMAP_H_
+#define ROBOTMAP_H_
 
+class RobotMap {
+  public:
 
-const int mtrL = 7;
-const int mtrR = 8;
+    const float kp = 0, ki = 0, kd = 0;
 
-const int mtrAL = 6;
-const int mtrAR = 5;
-const int srvClmp = 4;
+    const unsigned char type = 0x00;
+    const unsigned char src  = 0x01;
+    const unsigned char dest = 0x02;
 
-const int armLimit = 22;
-const int rwdLimit = 23;
+    const unsigned char mtrL = 7;
+    const unsigned char mtrR = 8;
 
-const int armpot = 0xA0;
-const int linesensor = 0xA1;
+    const unsigned char mtrAL = 6;
+    const unsigned char mtrAR = 5;
+    const unsigned char srvClmp = 4;
 
-const int sideSwitch = 28;
+    const unsigned char armLimit = 22;
+    const unsigned char rwdLimit = 23;
 
-const int mtrFwd = 180; // run motor full-speed 'forward'
-const int mtrRwd = 0; // run motor full-speed 'reverse'
-const int mtrStop = 90; // stop motor
+    const unsigned char armpot = 0xA0;
+    const unsigned char linesensor = 0xA1;
 
-const int ledpindebug = 13;
+    const unsigned char sideSwitch = 28;
 
+    const unsigned char mtrFwd = 180; // run motor full-speed 'forward'
+    const unsigned char mtrRwd = 0; // run motor full-speed 'reverse'
+    const unsigned char mtrStop = 90; // stop motor
 
-bool side = true; // red
-//boolean side = false; // blue
+    const unsigned char ledpindebug = 13;
+
+  };
+
+#endif /* ROBOTMAP_H_ */

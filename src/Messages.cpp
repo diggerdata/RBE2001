@@ -7,6 +7,7 @@
 #include "Arduino.h"
 #include "Messages.h"
 #include "BTComms.h"
+#include "RobotMap.h"
 
 BTComms comms;
 
@@ -69,30 +70,37 @@ unsigned char Messages::getMByte() {
  * inside member variables. Then add getters/setters to retrieve the status from your program.
  */
 bool Messages::read() {
+
+
+
 	if (comms.read()) {
 		Serial.println("Test");
-		switch (comms.getMessageByte(0)) {
-		case kStorageAvailability:
-			break;
-		case kSupplyAvailability:
-			break;
-		case kRadiationAlert:
-			break;
-		case kStopMovement:
-			//stopped = true;
-			//Serial.print("stopped");
-			break;
-		case kResumeMovement:
-			//stopped = false;
-			//Serial.print("resumed");
-			break;
-		case kRobotStatus:
-			break;
-		case kHeartbeat:
-			break;
-		default:
-		  //Serial.print("defaulted");
-			break;
+
+		if(comms.getMessageByte(RobotMap::src) != 0x00) {return false;}
+		if(comms.getMessageByte(RobotMap::dest) != 00 || comms.getMessageByte(RobotMap::dest) != 13) {return false;}
+
+		switch (comms.getMessageByte(RobotMap::type)) {
+			case kStorageAvailability:
+				break;
+			case kSupplyAvailability:
+				break;
+			case kRadiationAlert:
+				break;
+			case kStopMovement:
+				//stopped = true;
+				//Serial.print("stopped");
+				break;
+			case kResumeMovement:
+				//stopped = false;
+				//Serial.print("resumed");
+				break;
+			case kRobotStatus:
+				break;
+			case kHeartbeat:
+				break;
+			default:
+			  //Serial.print("defaulted");
+				break;
 		}
 		//Serial.print("read");
 		return true;
