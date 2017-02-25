@@ -1,2 +1,2 @@
 # RBE2001
-RBE2001 C17 team 13 final project repo.
+RBE2001 C17 Team 13 Final Project repo.
