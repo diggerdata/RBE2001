@@ -48,6 +48,7 @@ public:
 		BIT5= 32;
 		BIT6= 64;
 		BIT7= 128;
+	}
 
 	Messages();
 	
