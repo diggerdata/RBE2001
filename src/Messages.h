@@ -38,9 +38,19 @@ public:
 		kResumeMovement,
 		kRobotStatus,
 		kHeartbeat} MessageType;
+	
+	enum Bits {
+		BIT0= 1;
+		BIT1= 2;
+		BIT2= 4;
+		BIT3= 8;
+		BIT4= 16;
+		BIT5= 32;
+		BIT6= 64;
+		BIT7= 128;
 
 	Messages();
-
+	
 	bool isStopped();
 	void sendHeartbeat();
 	bool read();
