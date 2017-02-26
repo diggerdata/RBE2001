@@ -4,17 +4,12 @@
 #include "Messages.h"
 #include "Linesensor.h"
 
-long lastTime = 0;
-long integral = 0;
-float lasterror = 0;
+
 
 Messages msg;
 unsigned long timeForHeartbeat;
 
 
-Servo arml;         // create servo object to control left arm motor
-Servo armr;         // create servo object to control right arm motor
-Servo armg;         // create servo object to control finger servo
 Linesensor linesensor;
 
 void setup() {
@@ -26,18 +21,11 @@ void setup() {
   timeForHeartbeat = millis() + 1000;
 
 
-  arml.attach(mtrAL, 1000, 2000);
-  armg.attach(srvClmp, 1000, 2000);
 }
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
 
 }
-
-void armMove(int motorSpeed) {  // barebones arm drive
-  arml.write(motorSpeed);       // sets arm to motor speed
-}
-
 
 signed char turn () { //code to turn
   char sensorValue = linesensor.getArray();
@@ -68,11 +56,4 @@ void loop() {
     msg.sendHeartbeat();
     Serial.println("heartbeat");
   }
-}
-
-int PID (int setpoint, int currentpoint) {
-  int error = setpoint - currentpoint;
-  int inttime = millis() - lastTime;
-  int lasterror = error;
-  return (kp * error) + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
 }

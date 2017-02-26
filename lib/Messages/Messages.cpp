@@ -71,15 +71,13 @@ unsigned char Messages::getMByte() {
  */
 bool Messages::read() {
 
-
-
 	if (comms.read()) {
 		Serial.println("Test");
 
-		if(comms.getMessageByte(RobotMap::src) != 0x00) {return false;}
-		if(comms.getMessageByte(RobotMap::dest) != 00 || comms.getMessageByte(RobotMap::dest) != 13) {return false;}
+		if(comms.getMessageByte(src) != 0x00) {return false;}
+		if(comms.getMessageByte(dest) != 00 || comms.getMessageByte(dest) != 13) {return false;}
 
-		switch (comms.getMessageByte(RobotMap::type)) {
+		switch (comms.getMessageByte(type)) {
 			case kStorageAvailability:
 				break;
 			case kSupplyAvailability:

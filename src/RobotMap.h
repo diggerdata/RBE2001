@@ -23,6 +23,7 @@ static const unsigned char sideSwitch = 28;
 static const unsigned char mtrFwd = 180; // run motor full-speed 'forward'
 static const unsigned char mtrRwd = 0; // run motor full-speed 'reverse'
 static const unsigned char mtrStop = 90; // stop motor
+#define MTRSTOP 90
 
 static const unsigned char ledpindebug = 13;
 
