@@ -1,36 +1,32 @@
 #ifndef ROBOTMAP_H_
 #define ROBOTMAP_H_
 
-class RobotMap {
-  public:
+#include "Arduino.h"
 
-    const float kp = 0, ki = 0, kd = 0;
+static const float kp = 0, ki = 0, kd = 0;
 
-    const unsigned char type = 0x00;
-    const unsigned char src  = 0x01;
-    const unsigned char dest = 0x02;
+static const unsigned char type = 0x00;
+static const unsigned char src  = 0x01;
+static const unsigned char dest = 0x02;
 
-    const unsigned char mtrL = 7;
-    const unsigned char mtrR = 8;
+static const unsigned char mtrL = 7;
+static const unsigned char mtrR = 8;
 
-    const unsigned char mtrAL = 6;
-    const unsigned char mtrAR = 5;
-    const unsigned char srvClmp = 4;
+static const unsigned char mtrAL = 6;
+static const unsigned char srvClmp = 4;
 
-    const unsigned char armLimit = 22;
-    const unsigned char rwdLimit = 23;
+static const unsigned char armLimit = 22;
+static const unsigned char rwdLimit = 23;
 
-    const unsigned char armpot = 0xA0;
-    const unsigned char linesensor = 0xA1;
+static const unsigned char sideSwitch = 28;
 
-    const unsigned char sideSwitch = 28;
+static const unsigned char mtrFwd = 180; // run motor full-speed 'forward'
+static const unsigned char mtrRwd = 0; // run motor full-speed 'reverse'
+static const unsigned char mtrStop = 90; // stop motor
 
-    const unsigned char mtrFwd = 180; // run motor full-speed 'forward'
-    const unsigned char mtrRwd = 0; // run motor full-speed 'reverse'
-    const unsigned char mtrStop = 90; // stop motor
+static const unsigned char ledpindebug = 13;
 
-    const unsigned char ledpindebug = 13;
+static const unsigned char linesensorArray [8] = {A0, A1, A2, A3, A4, A5, A6, A7};
 
-  };
 
 #endif /* ROBOTMAP_H_ */

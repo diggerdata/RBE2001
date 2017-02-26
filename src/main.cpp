@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include "Messages.h"
+#include "Linesensor.h"
 
 long lastTime = 0;
 long integral = 0;
@@ -15,6 +16,7 @@ Servo driver;       // create servo object to control right drive motor
 Servo arml;         // create servo object to control left arm motor
 Servo armr;         // create servo object to control right arm motor
 Servo armg;         // create servo object to control finger servo
+Linesensor linesensor;
 
 void setup() {
 
@@ -26,8 +28,7 @@ void setup() {
 
   drivel.attach(mtrL, 1000, 2000);
   driver.attach(mtrR, 1000, 2000);
-  arml.attach(mtrAL, 1000, 2000); //is correct?
-  armr.attach(mtrAR, 1000, 2000);
+  arml.attach(mtrAL, 1000, 2000);
   armg.attach(srvClmp, 1000, 2000);
 }
 
@@ -42,12 +43,25 @@ void drive(int leftm, int rightm) { // barebones drive
 
 void armMove(int motorSpeed) {  // barebones arm drive
   arml.write(motorSpeed);       // sets arm to motor speed
-  armr.write(180 - motorSpeed); // Inverted for side
 }
 
 void stopRobot () { //stop
   drivel.write(mtrStop);
   driver.write(mtrStop);
+}
+
+signed char turn () { //code to turn
+  char sensorValue = linesensor.getArray();
+
+  if ((sensorValue | 0b00000000) == 0b11111111) {
+
+  }
+
+  if ((sensorValue | 0b00011000) == 0b11111111) {
+
+  }
+
+  return 0;
 }
 
 //////////////////////////////////////////////
