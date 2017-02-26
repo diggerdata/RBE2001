@@ -14,9 +14,11 @@
 class Linesensor {
   public:
     Linesensor();
-    unsigned char Linesensor::getArray(); //returns a char with a 1 in each bit for each sensor
+    unsigned char getArray(); //returns a char with a 1 in each bit for each sensor
+    void update();
 
   private:
+    unsigned char sensorState;
     bool getSensor(int number); //1 to 8
 
 };

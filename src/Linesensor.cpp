@@ -7,7 +7,15 @@ Linesensor::Linesensor() {
 
 
 unsigned char Linesensor::getArray() {
-    unsigned char linesensorChar = 0;
+    return sensorState;
+}
+
+bool getSensor(int number) {
+  return analogRead(number);
+}
+
+void Linesensor::update() {
+    volatile unsigned char linesensorChar = 0;
 
     for (unsigned char i = 0; i < 8; ++i)
     {
@@ -17,9 +25,5 @@ unsigned char Linesensor::getArray() {
         }
     }
 
-    return linesensorChar;
-}
-
-bool getSensor(int number) {
-  return analogRead(number);
+    sensorState = linesensorChar;
 }
