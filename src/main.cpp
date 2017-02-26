@@ -1,6 +1,6 @@
 #include "RobotMap.h"
 #include <Arduino.h>
-#include <Servo.h>
+
 #include "Messages.h"
 #include "Linesensor.h"
 
@@ -11,8 +11,7 @@ float lasterror = 0;
 Messages msg;
 unsigned long timeForHeartbeat;
 
-Servo drivel;       // create servo object to control left drive motor
-Servo driver;       // create servo object to control right drive motor
+
 Servo arml;         // create servo object to control left arm motor
 Servo armr;         // create servo object to control right arm motor
 Servo armg;         // create servo object to control finger servo
@@ -26,8 +25,7 @@ void setup() {
   msg.setup();
   timeForHeartbeat = millis() + 1000;
 
-  drivel.attach(mtrL, 1000, 2000);
-  driver.attach(mtrR, 1000, 2000);
+
   arml.attach(mtrAL, 1000, 2000);
   armg.attach(srvClmp, 1000, 2000);
 }
@@ -36,19 +34,10 @@ void auton () { // auton by task number. Everything passed the commented out blo
 
 }
 
-void drive(int leftm, int rightm) { // barebones drive
-  drivel.write(180 - leftm);    // Inverted for left side, so fwdmax is fwd
-  driver.write(rightm);         // sets value to rightm
-}
-
 void armMove(int motorSpeed) {  // barebones arm drive
   arml.write(motorSpeed);       // sets arm to motor speed
 }
 
-void stopRobot () { //stop
-  drivel.write(mtrStop);
-  driver.write(mtrStop);
-}
 
 signed char turn () { //code to turn
   char sensorValue = linesensor.getArray();
