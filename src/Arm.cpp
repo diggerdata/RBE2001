@@ -11,9 +11,20 @@
 #include <Servo.h>
 
 
-Arm::Arm(unsigned char armMotorPort, unsigned char potPort, unsigned char gripServoPort) {
+Arm::Arm() {}
+
+void Arm::attach (unsigned char armMotorPort, unsigned char potPort, unsigned char gripServoPort) {
+    pot = potPort;
     armMotor.attach(armMotorPort, 1000, 2000);
     gripServo.attach(gripServoPort, 1000, 2000);
+}
+
+void Arm::setHigh () {      //bypasses update();
+    set (HIGHPOS);    // stops
+}
+
+void Arm::setLow () {      //bypasses update();
+    set (LOWPOS);    // stops
 }
 
 void Arm::stop () { //stop
@@ -24,16 +35,12 @@ void Arm::instantStop () {      //bypasses update();
     armMotor.write(MTRSTOP);    // stops
 }
 
-void Arm::updatePot () {      //bypasses update();
-    armMotor.write(MTRSTOP);    // stops
+void Arm::updatePot () {
+    armCurrentPoint = analogRead(pot);
 }
 
-unsigned char Arm::getPot () {
-
-}
-
-void Arm::set () {      //bypasses update();
-    armMotor.write(MTRSTOP);    // stops
+void Arm::set (int pos) {      //bypasses update();
+    armSetPoint = pos;    // stops
 }
 
 int Arm::pid() {
@@ -48,6 +55,6 @@ int Arm::pid (int setpoint, int currentpoint) {
 }
 
 void Arm::update() {
-
+    updatePot();
     armMotor.write(MTRSTOP + pid());
 }

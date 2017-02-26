@@ -12,8 +12,9 @@ static const unsigned char dest = 0x02;
 static const unsigned char mtrL = 7;
 static const unsigned char mtrR = 8;
 
-static const unsigned char mtrAL = 6;
+static const unsigned char mtrArm = 6;
 static const unsigned char srvClmp = 4;
+static const unsigned char potArm = A10;
 
 static const unsigned char armLimit = 22;
 static const unsigned char rwdLimit = 23;

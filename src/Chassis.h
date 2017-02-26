@@ -16,7 +16,8 @@
  */
 class Chassis {
     public:
-        Chassis(unsigned char leftMotor, unsigned char rightMotor);
+        Chassis();
+        void attach(unsigned char leftMotor, unsigned char rightMotor);
         void drive(signed char speed, signed char turn);
         void update();
         void stop();

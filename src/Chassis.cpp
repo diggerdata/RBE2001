@@ -10,7 +10,9 @@
 #include "RobotMap.h"
 #include <Servo.h>
 
-Chassis::Chassis(unsigned char leftMotor, unsigned char rightMotor) {
+Chassis::Chassis(){}
+
+void Chassis::attach(unsigned char leftMotor, unsigned char rightMotor) {
     drivel.attach(leftMotor, 1000, 2000);
     driver.attach(rightMotor, 1000, 2000);
 }

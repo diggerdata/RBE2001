@@ -2,6 +2,8 @@
 #include <Arduino.h>
 
 #include "Messages.h"
+#include "Chassis.h"
+#include "Arm.h"
 #include "Linesensor.h"
 
 
@@ -11,6 +13,8 @@ unsigned long timeForHeartbeat;
 
 
 Linesensor linesensor;
+Chassis chassis;
+Arm arm;
 
 void setup() {
 
@@ -20,10 +24,23 @@ void setup() {
   msg.setup();
   timeForHeartbeat = millis() + 1000;
 
+  chassis.attach(mtrL, mtrR);
+  arm.attach(mtrArm, potArm, srvClmp);
 
 }
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
+
+}
+
+void update () { // update method. Call this to excecute stored states
+    if (msg.isStopped()) {
+        chassis.instantStop();
+        arm.instantStop();
+    } else {
+        chassis.update();
+        arm.update();
+    }
 
 }
 

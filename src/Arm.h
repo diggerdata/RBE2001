@@ -5,23 +5,35 @@
  *      Author: james
  */
 
-#ifndef DRIVE_H_
-#define DRIVE_H_
+#ifndef ARM_H_
+#define ARM_H_
 
 #include <Arduino.h>
 #include <Servo.h>
+
+#define LOWPOS 0
+#define HIGHPOS 0
 
 /**
  * Handles linesensor information
  */
 class Arm {
     public:
-        Arm(unsigned char armMotorPort, unsigned char potPort, unsigned char gripServoPort);
+        Arm();
+        void attach (unsigned char armMotorPort, unsigned char potPort, unsigned char gripServoPort);
+        void setHigh ();
+        void setLow ();
         void update();
         void stop();
         void instantStop();
 
     private:
+
+        unsigned char pot;
+
+        void updatePot ();
+
+        void set (int pos);
 
         int pid (int setpoint, int currentpoint);
         int pid ();
@@ -41,4 +53,4 @@ class Arm {
 
 };
 
-#endif /* DRIVE_H_ */
+#endif /* ARM_H_ */
