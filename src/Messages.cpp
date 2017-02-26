@@ -80,27 +80,47 @@ bool Messages::read() {
 
 		switch (comms.getMessageByte(type)) {
 			case kStorageAvailability:
-				strTube0AVL;
-				strTube1AVL;
-				strTube2AVL;
-				strTube3AVL;
+				strTube0AVL= (comms.getMessageByte(0) & BIT0);
+				strTube1AVL= (comms.getMessageByte(0) & BIT1);
+				strTube2AVL= (comms.getMessageByte(0) & BIT2);
+				strTube3AVL= (comms.getMessageByte(0) & BIT3);	
 				break;
+				
 			case kSupplyAvailability:
+				splyTube0AVL= (comms.getMessageByte(0) & BIT0);
+				splyTube1AVL= (comms.getMessageByte(0) & BIT1);
+				splyTube2AVL= (comms.getMessageByte(0) & BIT2);
+				splyTube3AVL= (comms.getMessageByte(0) & BIT3);	
 				break;
+				
 			case kRadiationAlert:
+				if(comms.getMessageByte(0) == 0x2C)
+					hasSpentRod= true;
+				else 
+					hasSpentRod= false;
+				
+				if(comms.getMessageByte(0) == 0xFF)
+					hasNewRod= true;
+				else
+					hasNewRod= false;
 				break;
+
 			case kStopMovement:
 				//stopped = true;
 				//Serial.print("stopped");
 				break;
+				
 			case kResumeMovement:
 				//stopped = false;
 				//Serial.print("resumed");
 				break;
+				
 			case kRobotStatus:
 				break;
+				
 			case kHeartbeat:
 				break;
+				
 			default:
 			  //Serial.print("defaulted");
 				break;
