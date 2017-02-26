@@ -57,6 +57,7 @@ void Messages::printMessage() {
     }
 }
 
+
 unsigned char Messages::getMByte() {
 
 	return comms.getMessageByte(0);
@@ -79,6 +80,10 @@ bool Messages::read() {
 
 		switch (comms.getMessageByte(type)) {
 			case kStorageAvailability:
+				strTube0AVL;
+				strTube1AVL;
+				strTube2AVL;
+				strTube3AVL;
 				break;
 			case kSupplyAvailability:
 				break;
