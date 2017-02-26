@@ -24,8 +24,8 @@ class Chassis {
         void instantStop();
 
     private:
-        signed char speedState;
-        signed char turnState;
+        signed char speedState = 0;
+        signed char turnState = 0;
         Servo drivel;       // create servo object to control left drive motor
         Servo driver;       // create servo object to control right drive motor
 
