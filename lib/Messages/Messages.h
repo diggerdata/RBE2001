@@ -1,3 +1,4 @@
+
 /*
  * Messages.h
  *
@@ -49,6 +50,17 @@ public:
 
 private:
 	bool stopped;
+	bool strTube0AVL;
+	bool strTube1AVL;
+	bool strTube2AVL;
+	bool strTube3AVL;
+	bool splyTube0AVL;
+	bool splyTube1AVL;
+	bool splyTube2AVL;
+	bool splyTube3AVL; //all tubeXAVL variables represent the storage and supply tubes. True= contains a rod, false= empty
+	bool hasSpentRod;	
+	bool hasNewRod;	//true= has rod, false= no rod 
+	
 };
 
 #endif /* MESSAGES_H_ */
