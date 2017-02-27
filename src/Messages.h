@@ -38,7 +38,7 @@ public:
 		kResumeMovement,
 		kRobotStatus,
 		kHeartbeat} MessageType;
-	
+
 	enum Bits {
 		BIT0= 1;
 		BIT1= 2;
@@ -47,11 +47,11 @@ public:
 		BIT4= 16;
 		BIT5= 32;
 		BIT6= 64;
-		BIT7= 128;
+		BIT7= 128;	//standard bitwise operators
 	}
 
 	Messages();
-	
+
 	bool isStopped();
 	void sendHeartbeat();
 	bool read();
@@ -69,9 +69,9 @@ private:
 	bool splyTube1AVL;
 	bool splyTube2AVL;
 	bool splyTube3AVL; //all tubeXAVL variables represent the storage and supply tubes. True= contains a rod, false= empty
-	bool hasSpentRod;	
-	bool hasNewRod;	//true= has rod, false= no rod 
-	
+	bool hasSpentRod;
+	bool hasNewRod;	//true= has rod, false= no rod
+
 };
 
 #endif /* MESSAGES_H_ */
