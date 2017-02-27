@@ -58,8 +58,8 @@ public:
 	void setup();
 	unsigned char getMByte();
 	void printMessage();
-	bool getStorageAvl();
-	bool getSupplyAvl();
+	char getStorageAvl();
+	char getSupplyAvl();
 	bool getRadAlert();
 	char getRodType();
 
@@ -75,7 +75,8 @@ private:
 	bool splyTube3AVL; //all tubeXAVL variables represent the storage and supply tubes. True= contains a rod, false= empty
 	bool hasSpentRod;
 	bool hasNewRod;	//true= has rod, false= no rod
-
+	unsigned char strTubeAVL;
+	unsigned char splyTubeAVL;
 };
 
 #endif /* MESSAGES_H_ */
