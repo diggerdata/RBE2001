@@ -47,7 +47,7 @@ public:
 		BIT4 =  16,
 		BIT5 =  32,
 		BIT6 =  64,
-		BIT7 = 128
+		BIT7 = 128 //standard bitwise operators
 	};
 
 	Messages();

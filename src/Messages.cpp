@@ -130,3 +130,19 @@ bool Messages::read() {
 	}
 	return false;
 }
+
+bool Messages::getStorageAvl() {
+	
+}
+
+bool Messages::getSupplyAvl() {
+	
+}
+
+bool Messages::getRadAlert() {
+	
+}
+
+
+
+
