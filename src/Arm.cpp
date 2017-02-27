@@ -48,13 +48,17 @@ int Arm::pid() {
 }
 
 int Arm::pid (int setpoint, int currentpoint) {
-  int error = setpoint - currentpoint;
+  // int error = setpoint - currentpoint;
   // int inttime = millis() - lastTime;
   // int lasterror = error;
-  return (kp * error); // + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
+
+  // return (kp * error); // + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
+
+  return 0;
 }
 
 void Arm::update() {
     updatePot();
+    Serial.print(armCurrentPoint);
     armMotor.write(MTRSTOP + pid());
 }
