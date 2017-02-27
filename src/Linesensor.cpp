@@ -19,8 +19,8 @@ void Linesensor::update() {
 
     for (unsigned char i = 0; i < 8; ++i)
     {
+        linesensorChar <<= 1;
         if (getSensor(linesensorArray[i])) {
-            linesensorChar <<= 1;
             linesensorChar |= 0b1;
         }
     }
