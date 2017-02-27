@@ -11,7 +11,8 @@ unsigned char Linesensor::getArray() {
 }
 
 bool getSensor(int number) {
-  return analogRead(number);
+    Serial.println(digitalRead(number) + analogRead(number));
+  return digitalRead(number);
 }
 
 void Linesensor::update() {
