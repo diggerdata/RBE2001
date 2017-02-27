@@ -17,8 +17,7 @@ bool getSensor(int number) {
 void Linesensor::update() {
     volatile unsigned char linesensorChar = 0;
 
-    for (unsigned char i = 0; i < 8; ++i)
-    {
+    for (unsigned char i = 0; i < 8; ++i) {
         linesensorChar <<= 1;
         if (getSensor(linesensorArray[i])) {
             linesensorChar |= 0b1;
