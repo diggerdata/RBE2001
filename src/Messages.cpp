@@ -83,22 +83,22 @@ bool Messages::read() {
 				strTube0AVL= (comms.getMessageByte(0) & BIT0);
 				strTube1AVL= (comms.getMessageByte(0) & BIT1);
 				strTube2AVL= (comms.getMessageByte(0) & BIT2);
-				strTube3AVL= (comms.getMessageByte(0) & BIT3);	
+				strTube3AVL= (comms.getMessageByte(0) & BIT3);
 				break;
-				
+
 			case kSupplyAvailability:
 				splyTube0AVL= (comms.getMessageByte(0) & BIT0);
 				splyTube1AVL= (comms.getMessageByte(0) & BIT1);
 				splyTube2AVL= (comms.getMessageByte(0) & BIT2);
-				splyTube3AVL= (comms.getMessageByte(0) & BIT3);	
+				splyTube3AVL= (comms.getMessageByte(0) & BIT3);
 				break;
-				
+
 			case kRadiationAlert:
 				if(comms.getMessageByte(0) == 0x2C)
 					hasSpentRod= true;
-				else 
+				else
 					hasSpentRod= false;
-				
+
 				if(comms.getMessageByte(0) == 0xFF)
 					hasNewRod= true;
 				else
@@ -109,18 +109,18 @@ bool Messages::read() {
 				//stopped = true;
 				//Serial.print("stopped");
 				break;
-				
+
 			case kResumeMovement:
 				//stopped = false;
 				//Serial.print("resumed");
 				break;
-				
+
 			case kRobotStatus:
 				break;
-				
+
 			case kHeartbeat:
 				break;
-				
+
 			default:
 			  //Serial.print("defaulted");
 				break;
@@ -132,17 +132,23 @@ bool Messages::read() {
 }
 
 bool Messages::getStorageAvl() {
-	
+		
 }
 
 bool Messages::getSupplyAvl() {
-	
+
 }
 
 bool Messages::getRadAlert() {
-	
+	if(hasNewRod || hasSpentRod)
+		return true;
 }
 
-
-
-
+char Messages::getRodType() {	//returns n for new rod, s for spent, e for error
+	if(hasNewRod && !hasSpentRod)
+		return 'n';
+	else if(!hasNewRod && hasSpentRod)
+		return 's';
+	else
+		return 'e';
+}

@@ -58,6 +58,10 @@ public:
 	void setup();
 	unsigned char getMByte();
 	void printMessage();
+	bool getStorageAvl();
+	bool getSupplyAvl();
+	bool getRadAlert();
+	char getRodType();
 
 private:
 	bool stopped;
