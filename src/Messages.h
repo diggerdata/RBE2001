@@ -40,14 +40,14 @@ public:
 		kHeartbeat} MessageType;
 
 	enum Bits {
-		BIT0 =   1,
-		BIT1 =   2,
-		BIT2 =   4,
-		BIT3 =   8,
-		BIT4 =  16,
-		BIT5 =  32,
-		BIT6 =  64,
-		BIT7 = 128 //standard bitwise operators
+		BIT0 = 0b00000001,
+		BIT1 = 0b00000010,
+		BIT2 = 0b00000100,
+		BIT3 = 0b00001000,
+		BIT4 = 0b00010000,
+		BIT5 = 0b00100000,
+		BIT6 = 0b01000000,
+		BIT7 = 0b10000000 //standard bitwise operators
 	};
 
 	Messages();
