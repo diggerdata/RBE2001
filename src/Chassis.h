@@ -17,7 +17,7 @@
 class Chassis {
     public:
         Chassis();
-        void attach(unsigned char leftMotor, unsigned char rightMotor);
+        void attach(unsigned char leftMotorFwd, unsigned char rightMotorFwd, unsigned char leftMotorRwd, unsigned char rightMotorRwd);
         void drive(signed char speed, signed char turn);
         void update();
         void stop();
@@ -26,8 +26,12 @@ class Chassis {
     private:
         signed char speedState = 0;
         signed char turnState = 0;
-        Servo drivel;       // create servo object to control left drive motor
-        Servo driver;       // create servo object to control right drive motor
+        unsigned char driveLF;       // create servo object to control left drive motor
+        unsigned char driveRF;       // create servo object to control right drive motor
+        unsigned char driveLR;       // create servo object to control left drive motor
+        unsigned char driveRR;       // create servo object to control right drive motor
+
+
 
 };
 
