@@ -131,12 +131,32 @@ bool Messages::read() {
 	return false;
 }
 
-bool Messages::getStorageAvl() {
-		
+char Messages::getStorageAvl() {
+		strTubeAVL= 0;
+		if(strTube0AVL)
+			strTubeAVL |= BIT0;
+		if(strTube1AVL)
+			strTubeAVL |= BIT1;
+		if(strTube2AVL)
+			strTubeAVL |= BIT2;
+		if(strTube3AVL)
+			strTubeAVL |= BIT3;
+
+		return strTubeAVL;
 }
 
-bool Messages::getSupplyAvl() {
+char Messages::getSupplyAvl() {
+	splyTubeAVL= 0;
+	if(splyTube0AVL)
+		splyTubeAVL |= BIT0;
+	if(splyTube1AVL)
+		splyTubeAVL |= BIT1;
+	if(splyTube2AVL)
+		splyTubeAVL |= BIT2;
+	if(splyTube3AVL)
+		splyTubeAVL |= BIT3;
 
+	return splyTubeAVL; 
 }
 
 bool Messages::getRadAlert() {
