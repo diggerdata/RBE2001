@@ -73,7 +73,7 @@ unsigned char Messages::getMByte() {
 bool Messages::read() {
 
 	if (comms.read()) {
-		Serial.println("Test");
+		// Serial.println("Test");
 
 		if(comms.getMessageByte(src) != 0x00) {return false;}
 		if(comms.getMessageByte(dest) != 00 || comms.getMessageByte(dest) != 13) {return false;}
@@ -170,9 +170,7 @@ char Messages::getSupplyAvl() {
 }
 
 bool Messages::getRadAlert() {
-	if(hasNewRod || hasSpentRod) {
-		return true;
-	}
+	return hasNewRod || hasSpentRod;
 }
 
 char Messages::getRodType() {	//returns n for new rod, s for spent, e for error

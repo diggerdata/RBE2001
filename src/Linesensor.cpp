@@ -10,9 +10,9 @@ unsigned char Linesensor::getArray() {
     return sensorState;
 }
 
-bool getSensor(int number) {
-    Serial.print(digitalRead(number));
-    Serial.println(analogRead(number));
+bool Linesensor::getSensor(int number) {
+    // Serial.print(digitalRead(number));
+    // Serial.println(analogRead(number));
     return digitalRead(number);
 }
 
@@ -33,5 +33,6 @@ void Linesensor::update() {
     sensorState = linesensorChar;
 
     // Serial.println("sensor = " + temp);
-    Serial.println("sensor = " + sensorState);
+    Serial.print("sensor = ");
+    Serial.println(sensorState);
 }

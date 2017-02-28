@@ -63,7 +63,7 @@ int Arm::pid (int setpoint, int currentpoint) {
 
 void Arm::update() {
     updatePot();
-    Serial.print("ARM POT: ");
-    Serial.println((int) armCurrentPoint);
+    // Serial.print("ARM POT: ");
+    // Serial.println((int) armCurrentPoint);
     armMotor.write(90 + pid());
 }

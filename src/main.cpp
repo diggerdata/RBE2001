@@ -35,7 +35,7 @@ void setup() {
 }
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
-    chassis.drive(60, 0);
+    chassis.drive(0, 0);
 }
 
 void update () { // update method. Call this to excecute stored states
@@ -46,6 +46,7 @@ void update () { // update method. Call this to excecute stored states
         chassis.update();
         arm.update();
     }
+    linesensor.update();
 
 }
 
@@ -88,11 +89,11 @@ void loop() {
   if (millis() > timeForHeartbeat) {
     timeForHeartbeat = millis() + 1000;
     msg.sendHeartbeat();
-    Serial.println("heartbeat");
+    // Serial.println("heartbeat");
   }
   if (millis() > timeForPush) {
     timeForPush = millis() + 100;
     update();
-    Serial.println("pushed");
+    // Serial.println("pushed");
   }
 }
