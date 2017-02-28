@@ -16,6 +16,7 @@ class Linesensor {
     Linesensor();
     unsigned char getArray(); //returns a char with a 1 in each bit for each sensor
     void update();
+    void init();
 
   private:
     unsigned char sensorState;

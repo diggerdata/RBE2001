@@ -31,6 +31,7 @@ void setup() {
 
   chassis.instantStop();
   arm.instantStop();
+  linesensor.init();
 
 }
 
@@ -54,11 +55,7 @@ signed char turn () { //code to turn
   char sensorValue = linesensor.getArray();
 
   if ((sensorValue | 0b00000000) == 0b11111111) {
-      if (0 /* code to determine if at correct position */) {
-        //   chassis.drive(0, 0); //left or right
-      } else if (0 /* code to determine if already orientated */) {
-        //   chassis.drive(60, 0);
-      }
+      chassis.drive(0, 0);
   }
 
   if ((sensorValue | 0b00011000) == 0b11111111) {
@@ -66,11 +63,11 @@ signed char turn () { //code to turn
   }
 
   if ((sensorValue | 0b11100000) == 0b11111111) {
-      chassis.turn(0);
+      chassis.turn(20);
   }
 
   if ((sensorValue | 0b00000111) == 0b11111111) {
-      chassis.turn(0);
+      chassis.turn(-20);
   }
 
   return 0;
