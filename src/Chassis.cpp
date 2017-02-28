@@ -33,10 +33,10 @@ void Chassis::stop () { //stop
 }
 
 void Chassis::instantStop () { //bypasses update();
-    pinMode(driveLF, 0);
-    pinMode(driveRF, 0);
-    pinMode(driveLR, 0);
-    pinMode(driveRR, 0);
+    analogWrite(driveLF, 0);
+    analogWrite(driveRF, 0);
+    analogWrite(driveLR, 0);
+    analogWrite(driveRR, 0);
 }
 
 void Chassis::drive(signed char speed, signed char turn) { //go
