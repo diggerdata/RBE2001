@@ -156,7 +156,7 @@ char Messages::getSupplyAvl() {
 	if(splyTube3AVL)
 		splyTubeAVL |= BIT3;
 
-	return splyTubeAVL; 
+	return splyTubeAVL;
 }
 
 bool Messages::getRadAlert() {
@@ -165,10 +165,11 @@ bool Messages::getRadAlert() {
 }
 
 char Messages::getRodType() {	//returns n for new rod, s for spent, e for error
-	if(hasNewRod && !hasSpentRod)
+	if(hasNewRod && !hasSpentRod) {
 		return 'n';
-	else if(!hasNewRod && hasSpentRod)
+	} else if (!hasNewRod && hasSpentRod) {
 		return 's';
-	else
+	} else {
 		return 'e';
+	}
 }

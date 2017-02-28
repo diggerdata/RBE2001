@@ -24,7 +24,7 @@ void setup() {
   msg.setup();
   timeForHeartbeat = millis() + 1000;
 
-  chassis.attach(mtrL, mtrR);
+  chassis.attach(mtrLF, mtrRF, mtrLR, mtrRR);
   arm.attach(mtrArm, potArm, srvClmp);
 
 }

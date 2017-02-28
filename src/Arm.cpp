@@ -7,7 +7,6 @@
 
 #include "Arduino.h"
 #include "Arm.h"
-#include "RobotMap.h"
 #include <Servo.h>
 
 
@@ -28,11 +27,11 @@ void Arm::setLow () {      //bypasses update();
 }
 
 void Arm::stop () { //stop
-    armSpeed = MTRSTOP;
+    armSpeed = 90;
 }
 
 void Arm::instantStop () {      //bypasses update();
-    armMotor.write(MTRSTOP);    // stops
+    armMotor.write(90);    // stops
 }
 
 void Arm::updatePot () {
@@ -60,5 +59,5 @@ int Arm::pid (int setpoint, int currentpoint) {
 void Arm::update() {
     updatePot();
     Serial.print(armCurrentPoint);
-    armMotor.write(MTRSTOP + pid());
+    armMotor.write(90 + pid());
 }

@@ -9,8 +9,10 @@ static const unsigned char type = 0x00;
 static const unsigned char src  = 0x01;
 static const unsigned char dest = 0x02;
 
-static const unsigned char mtrL = 7;
-static const unsigned char mtrR = 8;
+static const unsigned char mtrLF =  8;
+static const unsigned char mtrRF = 10;
+static const unsigned char mtrLR =  9;
+static const unsigned char mtrRR = 11;
 
 static const unsigned char mtrArm = 6;
 static const unsigned char srvClmp = 4;
