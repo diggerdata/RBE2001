@@ -10,6 +10,7 @@
 
 Messages msg;
 unsigned long timeForHeartbeat;
+unsigned long timeForCommit;
 
 
 Linesensor linesensor;
@@ -23,9 +24,13 @@ void setup() {
   Serial.println("Starting");
   msg.setup();
   timeForHeartbeat = millis() + 1000;
+  timeForCommit = millis() + 100;
 
   chassis.attach(mtrLF, mtrRF, mtrLR, mtrRR);
   arm.attach(mtrArm, potArm, srvClmp);
+
+  chassis.instantStop();
+  arm.instantStop();
 
 }
 
@@ -72,5 +77,10 @@ void loop() {
     timeForHeartbeat = millis() + 1000;
     msg.sendHeartbeat();
     Serial.println("heartbeat");
+  }
+  if (millis() > timeForCommit) {
+    timeForCommit = millis() + 100;
+    update();
+    Serial.println("commit");
   }
 }

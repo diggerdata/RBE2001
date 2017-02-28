@@ -17,6 +17,9 @@ void Chassis::attach(unsigned char leftMotorFwd, unsigned char rightMotorFwd, un
     driveLR =  leftMotorRwd;
     driveRR = rightMotorRwd;
 
+    speedState = 0;
+    turnState = 0;
+
     pinMode(driveLF, OUTPUT);
     pinMode(driveRF, OUTPUT);
     pinMode(driveLR, OUTPUT);
@@ -61,6 +64,9 @@ void Chassis::update() {
     } else {
         currRightSpeed = speedState - turnState;
     }
+
+    Serial.println("MOTOR LEFT : " + 0 + '\0');
+    Serial.println("MOTOR RIGHT: " + 0 + '\0');
 
     if (currLeftSpeed > 0) {
         pinMode(driveLF,  2 * currLeftSpeed);

@@ -38,11 +38,11 @@ class Arm {
         int pid (int setpoint, int currentpoint);
         int pid ();
 
-        signed char armSpeed;       //arm speed variable
-        signed char gripPos;        //grip pos variable
+        signed char armSpeed = 0;       //arm speed variable
+        signed char gripPos = 0;        //grip pos variable
 
-        unsigned char armSetPoint;     //arm pid
-        unsigned char armCurrentPoint; //arm pid
+        unsigned char armSetPoint = 0;     //arm pid
+        unsigned char armCurrentPoint = 0; //arm pid
 
         long integral = 0;
         long lastTime = 0;
