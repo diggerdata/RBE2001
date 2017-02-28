@@ -80,38 +80,40 @@ bool Messages::read() {
 
 		switch (comms.getMessageByte(type)) {
 			case kStorageAvailability:
-				strTube0AVL= (comms.getMessageByte(0) & BIT0);
-				strTube1AVL= (comms.getMessageByte(0) & BIT1);
-				strTube2AVL= (comms.getMessageByte(0) & BIT2);
-				strTube3AVL= (comms.getMessageByte(0) & BIT3);
+				strTube0AVL = (comms.getMessageByte(0) & BIT0);
+				strTube1AVL = (comms.getMessageByte(0) & BIT1);
+				strTube2AVL = (comms.getMessageByte(0) & BIT2);
+				strTube3AVL = (comms.getMessageByte(0) & BIT3);
 				break;
 
 			case kSupplyAvailability:
-				splyTube0AVL= (comms.getMessageByte(0) & BIT0);
-				splyTube1AVL= (comms.getMessageByte(0) & BIT1);
-				splyTube2AVL= (comms.getMessageByte(0) & BIT2);
-				splyTube3AVL= (comms.getMessageByte(0) & BIT3);
+				splyTube0AVL = (comms.getMessageByte(0) & BIT0);
+				splyTube1AVL = (comms.getMessageByte(0) & BIT1);
+				splyTube2AVL = (comms.getMessageByte(0) & BIT2);
+				splyTube3AVL = (comms.getMessageByte(0) & BIT3);
 				break;
 
 			case kRadiationAlert:
-				if(comms.getMessageByte(0) == 0x2C)
-					hasSpentRod= true;
-				else
-					hasSpentRod= false;
+				if(comms.getMessageByte(0) == 0x2C) {
+					hasSpentRod = true;
+				} else {
+					hasSpentRod = false;
+				}
 
-				if(comms.getMessageByte(0) == 0xFF)
-					hasNewRod= true;
-				else
-					hasNewRod= false;
+				if(comms.getMessageByte(0) == 0xFF) {
+					hasNewRod = true;
+				} else {
+					hasNewRod = false;
+				}
 				break;
 
 			case kStopMovement:
-				//stopped = true;
+				stopped = true;
 				//Serial.print("stopped");
 				break;
 
 			case kResumeMovement:
-				//stopped = false;
+				stopped = false;
 				//Serial.print("resumed");
 				break;
 
@@ -133,35 +135,44 @@ bool Messages::read() {
 
 char Messages::getStorageAvl() {
 		strTubeAVL= 0;
-		if(strTube0AVL)
+		if(strTube0AVL) {
 			strTubeAVL |= BIT0;
-		if(strTube1AVL)
+		}
+		if(strTube1AVL) {
 			strTubeAVL |= BIT1;
-		if(strTube2AVL)
+		}
+		if(strTube2AVL) {
 			strTubeAVL |= BIT2;
-		if(strTube3AVL)
+		}
+		if(strTube3AVL) {
 			strTubeAVL |= BIT3;
-
+		}
 		return strTubeAVL;
 }
 
 char Messages::getSupplyAvl() {
 	splyTubeAVL= 0;
-	if(splyTube0AVL)
+
+	if(splyTube0AVL) {
 		splyTubeAVL |= BIT0;
-	if(splyTube1AVL)
+	}
+	if(splyTube1AVL) {
 		splyTubeAVL |= BIT1;
-	if(splyTube2AVL)
+	}
+	if(splyTube2AVL) {
 		splyTubeAVL |= BIT2;
-	if(splyTube3AVL)
+	}
+	if(splyTube3AVL) {
 		splyTubeAVL |= BIT3;
+	}
 
 	return splyTubeAVL;
 }
 
 bool Messages::getRadAlert() {
-	if(hasNewRod || hasSpentRod)
+	if(hasNewRod || hasSpentRod) {
 		return true;
+	}
 }
 
 char Messages::getRodType() {	//returns n for new rod, s for spent, e for error
