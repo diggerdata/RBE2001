@@ -71,21 +71,21 @@ void Chassis::update() {
     Serial.println(currRightSpeed);
 
     if (currLeftSpeed > 0) {
-        pinMode(driveLF,  2 * currLeftSpeed);
-        pinMode(driveLR, 0);
+        analogWrite(driveLF,  2 * currLeftSpeed);
+        analogWrite(driveLR, 0);
     } else {
-        pinMode(driveLF, 0);
-        pinMode(driveLR, -2 * currLeftSpeed);
+        analogWrite(driveLF, 0);
+        analogWrite(driveLR, -2 * currLeftSpeed);
 
     }
 
     if (currRightSpeed > 0) {
-        pinMode(driveRF,  2 * currRightSpeed);
-        pinMode(driveRR, 0);
+        analogWrite(driveRF,  2 * currRightSpeed);
+        analogWrite(driveRR, 0);
 
     } else {
-        pinMode(driveRF, 0);
-        pinMode(driveRR, -2 * currRightSpeed);
+        analogWrite(driveRF, 0);
+        analogWrite(driveRR, -2 * currRightSpeed);
 
     }
 
