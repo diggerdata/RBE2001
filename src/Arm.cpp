@@ -15,6 +15,8 @@ Arm::Arm() {}
 void Arm::attach (unsigned char armMotorPort, unsigned char potPort, unsigned char gripServoPort) {
     pot = potPort;
 
+    pinMode(potPort, INPUT_PULLUP);
+
     armSetPoint = 0;
 
     armMotor.attach(armMotorPort, 1000, 2000);
@@ -61,6 +63,7 @@ int Arm::pid (int setpoint, int currentpoint) {
 
 void Arm::update() {
     updatePot();
-    Serial.println("ARM POT: " + (int) armCurrentPoint + '\0');
+    Serial.print("ARM POT: ");
+    Serial.println((int) armCurrentPoint);
     armMotor.write(90 + pid());
 }

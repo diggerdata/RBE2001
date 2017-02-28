@@ -65,13 +65,14 @@ void Chassis::update() {
         currRightSpeed = speedState - turnState;
     }
 
-    Serial.println("MOTOR LEFT : " + 0 + '\0');
-    Serial.println("MOTOR RIGHT: " + 0 + '\0');
+    Serial.print("MOTOR LEFT : ");
+    Serial.println(currLeftSpeed);
+    Serial.print("MOTOR RIGHT: ");
+    Serial.println(currRightSpeed);
 
     if (currLeftSpeed > 0) {
         pinMode(driveLF,  2 * currLeftSpeed);
         pinMode(driveLR, 0);
-
     } else {
         pinMode(driveLF, 0);
         pinMode(driveLR, -2 * currLeftSpeed);
@@ -79,12 +80,12 @@ void Chassis::update() {
     }
 
     if (currRightSpeed > 0) {
-        pinMode(driveRF, -2 * currRightSpeed);
+        pinMode(driveRF,  2 * currRightSpeed);
         pinMode(driveRR, 0);
 
     } else {
         pinMode(driveRF, 0);
-        pinMode(driveRR,  2 * currRightSpeed);
+        pinMode(driveRR, -2 * currRightSpeed);
 
     }
 
