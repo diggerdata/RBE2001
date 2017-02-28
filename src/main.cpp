@@ -81,6 +81,6 @@ void loop() {
   if (millis() > timeForPush) {
     timeForPush = millis() + 100;
     update();
-    Serial.println("commit");
+    Serial.println("pushed");
   }
 }
