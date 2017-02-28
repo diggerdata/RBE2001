@@ -22,6 +22,8 @@ class Chassis {
         void update();
         void stop();
         void instantStop();
+        void drive(signed char speed);
+        void turn(signed char turn);
 
     private:
         signed char speedState = 0;

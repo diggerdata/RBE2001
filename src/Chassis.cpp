@@ -44,6 +44,14 @@ void Chassis::drive(signed char speed, signed char turn) { //go
     turnState = turn;
 }
 
+void Chassis::drive(signed char speed) { //go
+    speedState = speed;
+}
+
+void Chassis::turn(signed char turn) { //keep going but turn
+    turnState = turn;
+}
+
 void Chassis::update() {
 
     signed char currLeftSpeed;
