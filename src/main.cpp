@@ -78,6 +78,34 @@ signed char turn () { //code to turn. 0= line detected 1= no line
 
   return 0;
 }
+signed char turnInvt () { //code to turn. 0= line detected 1= no line
+  char sensorValue = linesensor.getArray();
+
+  if ((sensorValue | !0b10000001) == 0b11111111) {
+      chassis.drive(0, 0);
+      Serial.println(sensorValue);
+  }
+
+  if ((sensorValue | !0b10011001) == 0b11111111) {
+      chassis.turn(0);
+      Serial.println(sensorValue);
+  }
+
+  if ((sensorValue | !0b00000111) == 0b11111111) {
+      chassis.turn(-20);
+      Serial.println(sensorValue);
+  }
+
+  if ((sensorValue | !0b11100001) == 0b11111111) {
+      chassis.turn(20);
+      Serial.println(sensorValue);
+  }
+
+  if ((sensorValue | !0b10000111) == 0b11111111) {
+      chassis.turn(-20);
+  }
+  return 0;
+}
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
     //chassis.drive(0, 0);
@@ -87,6 +115,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
           Serial.println("kDriveToReactorInitial");
           if(chassis.getLimit() == 1) {
             chassis.drive(mtrFwd);
+            // chassis.turn(-100);
             turn();
             Serial.print(chassis.getLimit());
           }
@@ -133,23 +162,37 @@ void auton () { // auton by task number. Everything passed the commented out blo
       case kBackUpInitial:
         Serial.println("kBackUpInitial");
         static unsigned int timeToStop1 = millis();
-        if (millis() > timeToStop1 + 5000) {
+        if (millis() > timeToStop1 + 2500) {
             state = kTurnAroundInitial;
           }
         else {
           chassis.drive(mtrRwd);
+          turnInvt();
         }
         break;
 
       case kTurnAroundInitial:
           Serial.println("kTurnAroundInitial");
-          if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
+          static unsigned int timeToStop77 = millis();
+          chassis.stop();
+          chassis.turn(50);
+         if (millis() > timeToStop77 + 4000) {
+
+          if(!linesensor.getArray() & (BIT3 & BIT4)) {
+
               chassis.stop();
               state = kDriveToLineInitial;
           }
+          // else {
+          //   chassis.turn(50);
+          // }
+
           else {
+            chassis.stop();
             chassis.turn(50);
-          }
+            }
+}
+
           break;
 
       case kDriveToLineInitial:
@@ -188,7 +231,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
 
       case kDriveToStorage:
           Serial.println("kDriveToStorage");
-          if(!chassis.getLimit()) {
+          if(chassis.getLimit() == 1) {
             chassis.drive(mtrFwd);
           }
           else {
