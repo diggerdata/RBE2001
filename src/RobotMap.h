@@ -20,9 +20,9 @@ static const unsigned char potArm = A1;
 
 static const unsigned char frontSwitch = 22;
 
-static const unsigned char mtrFwd = 180; // run motor full-speed 'forward'
-static const unsigned char mtrRwd = 0; // run motor full-speed 'reverse'
-static const unsigned char mtrStop = 90; // stop motor
+static const signed char mtrFwd = -50; // run motor full-speed 'forward'
+static const signed char mtrRwd = 50; // run motor full-speed 'reverse'
+static const signed char mtrStop = 0; // stop motor
 #define MTRSTOP 90
 
 static const unsigned char ledpindebug = 13;

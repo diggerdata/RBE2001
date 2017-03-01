@@ -54,14 +54,22 @@ signed char turn () { //code to turn. 0= line detected 1= no line
 
   if ((sensorValue | 0b10000001) == 0b11111111) {
       chassis.drive(0, 0);
+      Serial.println(sensorValue);
   }
 
   if ((sensorValue | 0b10011001) == 0b11111111) {
       chassis.turn(0);
+      Serial.println(sensorValue);
+  }
+
+  if ((sensorValue | 0b00000111) == 0b11111111) {
+      chassis.turn(-20);
+      Serial.println(sensorValue);
   }
 
   if ((sensorValue | 0b11100001) == 0b11111111) {
       chassis.turn(20);
+      Serial.println(sensorValue);
   }
 
   if ((sensorValue | 0b10000111) == 0b11111111) {
@@ -72,13 +80,14 @@ signed char turn () { //code to turn. 0= line detected 1= no line
 }
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
-    chassis.drive(0, 0);
+    //chassis.drive(0, 0);
     Serial.print("Current state: ");
     switch (state) {
       case kDriveToReactorInitial:
           Serial.println("kDriveToReactorInitial");
-          if(chassis.getLimit()) {
+          if(chassis.getLimit() == 1) {
             chassis.drive(mtrFwd);
+            turn();
             Serial.print(chassis.getLimit());
           }
           else {
@@ -305,7 +314,6 @@ void auton () { // auton by task number. Everything passed the commented out blo
           Serial.print("ERROR");
           //make LED flash for visual indication
 
-          break;
     }
 }
 

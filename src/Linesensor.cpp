@@ -23,8 +23,8 @@ void Linesensor::init() {
 
 bool Linesensor::getSensor(int number) {
     // Serial.print(digitalRead(number));
-    Serial.print(analogRead(number));
-    Serial.print('\t');
+    // Serial.print(analogRead(number));
+    // Serial.print('\t');
     return digitalRead(number);
 }
 
