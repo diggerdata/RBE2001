@@ -77,7 +77,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
     switch (state) {
       case kDriveToReactorInitial:
           Serial.println("kDriveToReactorInitial");
-          if(chassis.getLimit()) {
+          if(!chassis.getLimit()) {
             chassis.drive(mtrFwd);
             Serial.print(chassis.getLimit());
           }
