@@ -121,6 +121,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
                 }
           else {
             chassis.drive(mtrFwd);
+            turn();
           }
           break;
 
@@ -195,6 +196,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
                 }
           else {
             chassis.drive(mtrFwd);
+            turn();
           }
           break;
 
