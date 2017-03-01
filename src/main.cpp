@@ -51,7 +51,6 @@ void auton () { // auton by task number. Everything passed the commented out blo
     chassis.drive(0, 0);
     switch (state) {
       case kExtractRod:
-
       break;
       case kStoreRod:
 
@@ -85,7 +84,7 @@ void update () { // update method. Call this to excecute stored states
 
 }
 
-signed char turn () { //code to turn
+signed char turn () { //code to turn. 0= line detected 1= no line
   char sensorValue = linesensor.getArray();
 
   if ((sensorValue | 0b00000000) == 0b11111111) {
