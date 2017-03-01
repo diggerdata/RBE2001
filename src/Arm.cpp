@@ -55,7 +55,7 @@ int Arm::pid () { //default pid overload
     return pid(armSetPoint, armCurrentPoint);
 }
 
-int Arm::pid (int setpoint, int currentpoint) { //fix
+int Arm::pid (int setpoint, int currentpoint) { //fixg
   // int error = setpoint - currentpoint;
   // int inttime = millis() - lastTime;
   // int lasterror = error;

@@ -222,7 +222,6 @@ void auton () { // auton by task number. Everything passed the commented out blo
           break;
 
       case kStopAfterLineStorage:
-          Serial.println("kStopAfterLineInitial");
           static unsigned int timeToStop5 = millis();
           if (millis() > timeToStop5 + 1000) {
               state = kTurnToReactorStr;
@@ -296,6 +295,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
               turn();
             }
             break;
+
 
           default:
           Serial.print("ERROR");
