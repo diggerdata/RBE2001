@@ -18,7 +18,7 @@ unsigned long timeForPush;
 Linesensor linesensor;
 Chassis chassis;
 Arm arm;
-
+States state;
 void setup() {
 
   Serial.begin(9600); // Serial output begin
@@ -51,7 +51,23 @@ void setup() {
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
     chassis.drive(0, 0);
-    
+    switch (state) {
+      case kExtractRod:
+
+      break;
+      case kStoreRod:
+
+      break;
+      case kGetNewRod:
+      
+      break;
+      case kReplaceRod:
+
+      break;
+      default:
+
+      break;
+    }
 }
 
 void update () { // update method. Call this to excecute stored states
