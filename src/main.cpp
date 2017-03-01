@@ -13,6 +13,7 @@ unsigned long timeForHeartbeat;
 unsigned long timeForPush;
 
 volatile unsigned int tubeLinesCrossed = 0;
+volatile int gripTime = 0;
 
 Linesensor linesensor;
 Chassis chassis;
@@ -52,61 +53,48 @@ void setup() {
 void auton () { // auton by task number. Everything passed the commented out block is untested
     chassis.drive(0, 0);
     switch (state) {
-      case kDriveToReactor:
+      case kDriveToReactorInitial:
           if(true /*limit switch is not pressed*/) {
             chassis.drive(mtrFwd);
           }
           else {
             chassis.stop();
-            state = kArmDown;
+            state = kArmDownInitial;
           }
           break;
 
-      case kArmDown:
-          if(true /*robot is on a line*/) {
-
-          }
-          break;
-
-      case kArmUp:
-          if((msg.getStorageAvl() && BIT0) == BIT0) { //SHOULD check if closest tube is open. Might be backwards
-            //drive until first line, then turn.
-            //get rod, then turn around and drive until line.
-            //drive back to reactor and turn around, like above
-          }
-
-          else {
-            chassis.stop();
-            Serial.println("ERROR: Bluetooth message incorrect");
-            //LED flashing for visual indication
-          }
-          break;
-
-      case kTurnAround:
-          if((msg.getSupplyAvl() && BIT0) == BIT0) { //SHOULD check if closest tube is open. Might be backwards
-            //drive until first line, then turn.
-            //get rod, then turn around and drive until line
-            //drive back to reactor
-          }
-          else if((msg.getSupplyAvl() && BIT1) == BIT1) {  //checks if next tube is open
-            //drive until second line
-            //get rod, then turn around and drive until line
-            //drive back to reactor
-          }
-          else if(((msg.getSupplyAvl() && BIT2) == BIT2)) {  //etc
-            //drive until third line
-            //get rod, then turn around and drive until line
-            //drive back to reactor
-          }
-          else if((msg.getSupplyAvl() && BIT3) == BIT3) {  //checks if last tube is open
-            //drive until fourth line
-            //get rod, then turn around and drive until line
-            //drive back to reactor
+      case kArmDownInitial:
+          if(arm.getPot() == 1) {
+            state = kCloseGripInitial;
           }
           else {
-            chassis.stop();
-            Serial.println("ERROR: Bluetooth message incorrect");
-            //LED flashing for visual indication
+            arm.setLow();
+          }
+          break;
+
+      case kCloseGripInitial:
+          static unsigned int lastTime = millis();
+          arm.closeGrip();
+          if (millis() > lastTime + 1000) {
+              state = kArmUpInitial;
+          }
+          break;
+
+      case kArmUpInitial:
+          if(arm.getPot() == 0) {
+            state = kBackUpInitial;
+          }
+          else {
+            arm.setHigh();
+          }
+          break;
+
+      case kTurnAroundInitial:
+          if(linesensor.getArray() || (BIT3 && BIT4) == (BIT3 && BIT4)) {
+              chassis.stop();
+          }
+          else {
+            chassis.turn(180);
           }
           break;
 
