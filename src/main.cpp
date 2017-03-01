@@ -52,19 +52,19 @@ void setup() {
 signed char turn () { //code to turn. 0= line detected 1= no line
   char sensorValue = linesensor.getArray();
 
-  if ((sensorValue | 0b00000000) == 0b11111111) {
+  if ((sensorValue | 0b10000001) == 0b11111111) {
       chassis.drive(0, 0);
   }
 
-  if ((sensorValue | 0b00011000) == 0b11111111) {
+  if ((sensorValue | 0b10011001) == 0b11111111) {
       chassis.turn(0);
   }
 
-  if ((sensorValue | 0b11100000) == 0b11111111) {
+  if ((sensorValue | 0b11100001) == 0b11111111) {
       chassis.turn(20);
   }
 
-  if ((sensorValue | 0b00000111) == 0b11111111) {
+  if ((sensorValue | 0b10000111) == 0b11111111) {
       chassis.turn(-20);
   }
 
