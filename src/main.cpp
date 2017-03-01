@@ -37,6 +37,7 @@ void setup() {
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
     chassis.drive(0, 0);
+    
 }
 
 void update () { // update method. Call this to excecute stored states
