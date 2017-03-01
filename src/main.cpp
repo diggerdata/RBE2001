@@ -179,6 +179,24 @@ void auton () { // auton by task number. Everything passed the commented out blo
           }
           break;
 
+      case kTurnFromStorage:
+          if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
+            chassis.stop();
+            state = kDriveToStorage;
+          }
+          else {
+            chassis.turn(50);
+          }
+          break;
+
+      case kDriveFromStorage:
+          if(linesensor.getArray() == 0) {
+              state = kStopAfterLineStorage;
+                }
+          else {
+            chassis.drive(mtrFwd);
+          }
+          break;
           default:
           Serial.print("ERROR");
           //make LED flash for visual indication
