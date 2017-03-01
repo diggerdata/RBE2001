@@ -45,6 +45,7 @@ enum States {
   kBackUpStorage,
   kTurnFromStorage,
   kDriveFromStorage,
+  kStopAfterLineStorage,
   kTurnToReactor,
   kDriveToReactorStr, //drives off of horizontal lines, then begin getting supply
   kTurnAroundToSupply,
