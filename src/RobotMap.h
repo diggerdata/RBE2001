@@ -29,7 +29,7 @@ static const unsigned char ledpindebug = 13;
 
 static const unsigned char linesensorArray [8] = {A0, A2, A3, A4, A5, A6, A7, A8};
 
-volatile unsigned int tubeLinesCrossed= 0;
+volatile unsigned int tubeLinesCrossed = 0;
 
 enum States {
   kExtractRod, //take rod out of reactor after driving up to it.
