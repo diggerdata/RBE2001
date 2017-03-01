@@ -154,7 +154,17 @@ void auton () { // auton by task number. Everything passed the commented out blo
               state = kBackUpStorage;
             }
           else {
-              
+              arm.openGrip();
+          }
+          break;
+
+      case kBackUpStorage:
+          static unsigned int timeToStop4 = millis();
+          if (millis() > timeToStop4 + 1000) {
+              state = kTurnAroundInitial;
+            }
+          else {
+            chassis.drive(mtrRwd);
           }
           break;
 
