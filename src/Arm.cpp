@@ -43,6 +43,10 @@ void Arm::updatePot () {
     armCurrentPoint = analogRead(pot);
 }
 
+unsigned char Arm::getPot() {
+    return armCurrentPoint;
+  }
+
 void Arm::set (int pos) {      //bypasses update();
     armSetPoint = pos;    // stops
 }

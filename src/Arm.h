@@ -28,10 +28,11 @@ class Arm {
         void instantStop();
         void openGrip();
         void closeGrip();
+        unsigned char getPot();
 
     private:
 
-        unsigned char pot;
+        unsigned short pot;
 
         void updatePot ();
 
@@ -43,8 +44,8 @@ class Arm {
         signed char armSpeed = 0;       //arm speed variable
         signed char gripPos = 0;        //grip pos variable
 
-        unsigned char armSetPoint = 0;     //arm pid
-        unsigned char armCurrentPoint = 0; //arm pid
+        unsigned short armSetPoint = 0;     //arm pid
+        unsigned short armCurrentPoint = 0; //arm pid
 
         long integral = 0;
         long lastTime = 0;
