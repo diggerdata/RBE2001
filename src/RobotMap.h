@@ -29,7 +29,7 @@ static const unsigned char ledpindebug = 13;
 
 static const unsigned char linesensorArray [8] = {A0, A2, A3, A4, A5, A6, A7, A8};
 
-volatile unsigned int tubeLinesCrossed= 0; 
+volatile unsigned int tubeLinesCrossed= 0;
 
 enum States {
   kExtractRod, //take rod out of reactor after driving up to it.
@@ -37,6 +37,17 @@ enum States {
   kGetNewRod,  //drive to a filled supply tube and remove the rod.
   kReplaceRod  //drive to emptied reactor and place new rod in it.
   //SwitchReactor //potential state to reorient the robot and begin again.
+};
+
+enum Bits {
+  BIT0 = 0b00000001,
+  BIT1 = 0b00000010,
+  BIT2 = 0b00000100,
+  BIT3 = 0b00001000,
+  BIT4 = 0b00010000,
+  BIT5 = 0b00100000,
+  BIT6 = 0b01000000,
+  BIT7 = 0b10000000 //standard bitwise operators
 };
 
 #endif /* ROBOTMAP_H_ */
