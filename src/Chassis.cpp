@@ -27,6 +27,13 @@ void Chassis::attach(unsigned char leftMotorFwd, unsigned char leftMotorRwd, uns
 
 }
 
+void Chassis::attachLimit (unsigned char port) {
+    pinMode(limitPort, INPUT_PULLUP);
+}
+
+bool Chassis::getLimit() {
+    return limitState;
+}
 
 void Chassis::stop () { //stop
     speedState = 0;
@@ -78,6 +85,8 @@ void Chassis::update() {
     // Serial.println(currLeftSpeed);
     // Serial.print("MOTOR RIGHT: ");
     // Serial.println(currRightSpeed);
+
+    limitState = digitalRead(limitPort);
 
     if (currLeftSpeed > 0) {
         analogWrite(driveLF,  2 * currLeftSpeed);

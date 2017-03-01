@@ -25,6 +25,8 @@ class Chassis {
         void instantStop();
         void drive(signed char speed);
         void turn(signed char turn);
+        void attachLimit (unsigned char port);
+        bool getLimit();
 
     private:
 
@@ -38,6 +40,9 @@ class Chassis {
         unsigned char driveRF;       // create char to map right drive motor
         unsigned char driveLR;       // create char to map left drive motor
         unsigned char driveRR;       // create char to map right drive motor
+
+        bool limitState; 
+        unsigned char limitPort;
 
         unsigned char encLA;       // create char to map left encoder
         unsigned char encLB;       // create char to map right encoder
