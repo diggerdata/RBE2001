@@ -30,17 +30,17 @@ bool Linesensor::getSensor(int number) {
 
 void Linesensor::update() {
     volatile unsigned char linesensorChar = 0b0;
-    volatile unsigned long temp = 8;
+    // volatile unsigned long temp = 8;
 
     for (unsigned char i = 0; i < 8; ++i) {
         linesensorChar <<= 1;
-        temp *= 10;
+        // temp *= 10;
         if (getSensor(linesensorArray[i])) {
             linesensorChar |= 0b1;
 
 
         } else {
-            temp += 1;
+            // temp += 1;
         }
 
 
@@ -49,8 +49,8 @@ void Linesensor::update() {
 
     sensorState = 0b11111111 ^ linesensorChar;
 
-    Serial.print("sensor = ");
-    Serial.println(temp);
+    // Serial.print("sensor = ");
+    // Serial.println(temp);
     // Serial.print("sensor = ");
     // Serial.println(sensorState);
 }

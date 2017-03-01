@@ -40,6 +40,7 @@ void setup() {
 
   chassis.attach(mtrLF, mtrLR, mtrRF, mtrRR);
   arm.attach(mtrArm, potArm, srvClmp);
+  chassis.attachLimit(22);
 
   chassis.instantStop();
   arm.instantStop();
@@ -76,8 +77,9 @@ void auton () { // auton by task number. Everything passed the commented out blo
     switch (state) {
       case kDriveToReactorInitial:
           Serial.println("kDriveToReactorInitial");
-          if(true /*limit switch is not pressed*/) {
+          if(chassis.getLimit()) {
             chassis.drive(mtrFwd);
+            Serial.print(chassis.getLimit());
           }
           else {
             chassis.stop();
@@ -99,14 +101,14 @@ void auton () { // auton by task number. Everything passed the commented out blo
           Serial.println("kCloseGripInitial");
           static unsigned int lastTime = millis();
           arm.closeGrip();
-          if (millis() > lastTime + 1000) {
+          if (millis() > lastTime + 5000) {
               state = kArmUpInitial;
           }
           break;
 
       case kArmUpInitial:
           Serial.println("kArmUpInitial");
-          if(arm.getPot() >= 880) {
+          if(arm.getPot() >= 850) {
             state = kBackUpInitial;
           }
           else {
@@ -171,7 +173,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
 
       case kDriveToStorage:
           Serial.println("kDriveToStorage");
-          if(true /*limit switch is not pressed*/) {
+          if(!chassis.getLimit()) {
             chassis.drive(mtrFwd);
           }
           else {
