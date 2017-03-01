@@ -23,28 +23,28 @@ void Arm::attach (unsigned char armMotorPort, unsigned char potPort, unsigned ch
     gripServo.attach(gripServoPort, 1000, 2000);
 }
 
-void Arm::setHigh () {      //bypasses update();
-    set (HIGHPOS);    // stops
+void Arm::setHigh () {
+    set (HIGHPOS);
 }
 
-void Arm::setLow () {      //bypasses update();
-    set (LOWPOS);    // stops
+void Arm::setLow () {
+    set (LOWPOS);
 }
 
 void Arm::stop () { //stop
     armSpeed = 90;
 }
 
-void Arm::instantStop () {      //bypasses update();
-    armMotor.write(90);    // stops
+void Arm::instantStop () {
+    armMotor.write(90);
 }
 
 void Arm::updatePot () {
     armCurrentPoint = analogRead(pot);
 }
 
-void Arm::set (int pos) {      //bypasses update();
-    armSetPoint = pos;    // stops
+void Arm::set (int pos) {
+    armSetPoint = pos;
 }
 
 int Arm::pid () {
