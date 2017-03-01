@@ -18,7 +18,7 @@ void Arm::attach (unsigned char armMotorPort, unsigned char potPort, unsigned ch
 
     pinMode(potPort, INPUT_PULLUP);
 
-    armSetPoint = 0;
+    armSetPoint = HIGHPOS;
 
     armMotor.attach(armMotorPort, 1000, 2000);
     gripServo.attach(gripServoPort, 1000, 2000);
@@ -57,11 +57,11 @@ int Arm::pid () { //default pid overload
 }
 
 int Arm::pid (int setpoint, int currentpoint) { //fixg
-  int error = setpoint - currentpoint;
-  // int inttime = millis() - lastTime;
-  // int lasterror = error;
+  int error = - setpoint + currentpoint;
+  int inttime = millis() - lastTime;
+  int lasterror = error;
 
-  return (kp * error); // + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
+  return (kp * error) + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
 
   // return 0;
 }
@@ -75,8 +75,8 @@ void Arm::closeGrip() { //close grip
 
 void Arm::update() {
     updatePot();
-    // Serial.print("ARM POT: ");
-    // Serial.println((int) armCurrentPoint);
+    Serial.print("ARM POT: ");
+    Serial.println((int) armCurrentPoint);
     armMotor.write(90 + pid());
     gripServo.write(gripPos);
 }

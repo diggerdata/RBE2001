@@ -11,7 +11,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-#define LOWPOS 610 //APPROXIMATE values, dependent on battery
+#define LOWPOS 680 //APPROXIMATE values, dependent on battery
 #define HIGHPOS 880
 
 /**

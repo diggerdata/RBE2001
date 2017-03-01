@@ -352,7 +352,7 @@ void loop() {
     Serial.println("heartbeat");
   }
   if (millis() > timeForPush) {
-    timeForPush = millis() + 100;
+    timeForPush = millis() + 50;
     update();
     // Serial.println("pushed");
   }
