@@ -9,6 +9,7 @@
 #include "Arm.h"
 #include <Servo.h>
 
+static const float kp = 1, ki = 0, kd = 0;
 
 Arm::Arm() {}
 
@@ -56,13 +57,13 @@ int Arm::pid () { //default pid overload
 }
 
 int Arm::pid (int setpoint, int currentpoint) { //fixg
-  // int error = setpoint - currentpoint;
+  int error = setpoint - currentpoint;
   // int inttime = millis() - lastTime;
   // int lasterror = error;
 
-  // return (kp * error); // + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
+  return (kp * error); // + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
 
-  return 0;
+  // return 0;
 }
 void Arm::openGrip() { //open grip
     gripPos = 0;

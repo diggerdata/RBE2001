@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-static const float kp = 0, ki = 0, kd = 0;
+
 
 static const unsigned char type = 0x00;
 static const unsigned char src  = 0x01;
