@@ -198,7 +198,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
           }
           break;
 
-      case kStopAfterLineStorage: 
+      case kStopAfterLineStorage:
           default:
           Serial.print("ERROR");
           //make LED flash for visual indication
