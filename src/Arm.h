@@ -11,8 +11,8 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-#define LOWPOS 0
-#define HIGHPOS 0
+#define LOWPOS 610 //APPROXIMATE values, dependent on battery
+#define HIGHPOS 880
 
 /**
  * Handles linesensor information

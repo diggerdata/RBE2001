@@ -64,7 +64,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
           break;
 
       case kArmDownInitial:
-          if(arm.getPot() == 1) {
+          if(arm.getPot() <= 620) {
             state = kCloseGripInitial;
           }
           else {
@@ -81,7 +81,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
           break;
 
       case kArmUpInitial:
-          if(arm.getPot() == 0) {
+          if(arm.getPot() >= 880) {
             state = kBackUpInitial;
           }
           else {
@@ -89,23 +89,75 @@ void auton () { // auton by task number. Everything passed the commented out blo
           }
           break;
 
+      case kBackUpInitial:
+        static unsigned int timeToStop1 = millis();
+        if (millis() > timeToStop1 + 1000) {
+            state = kTurnAroundInitial;
+          }
+        else {
+          chassis.drive(mtrRwd);
+        }
+        break;
+
       case kTurnAroundInitial:
-          if(linesensor.getArray() || (BIT3 && BIT4) == (BIT3 && BIT4)) {
+          if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
               chassis.stop();
+              state = kDriveToLineInitial;
           }
           else {
-            chassis.turn(180);
+            chassis.turn(50);
           }
           break;
 
-      case kDriveToLine:
-          while(true /*limit switch is not pressed*/)
+      case kDriveToLineInitial:
+          if(linesensor.getArray() == 0) {
+              state = kStopAfterLineInitial;
+                }
+          else {
             chassis.drive(mtrFwd);
-          arm.setLow();
-          arm.openGrip();
-          //some delay
-          arm.setHigh();
+          }
           break;
+
+      case kStopAfterLineInitial:
+            static unsigned int timeToStop2 = millis();
+            if (millis() > timeToStop2 + 1000) {
+                state = kTurnToStorageInitial;
+              }
+              else{
+                chassis.drive(mtrFwd);
+              }
+          break;
+
+      case kTurnToStorageInitial:
+          if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
+            chassis.stop();
+            state = kDriveToStorage;
+          }
+          else {
+            chassis.turn(50);
+          }
+          break;
+
+      case kDriveToStorage:
+          if(true /*limit switch is not pressed*/) {
+            chassis.drive(mtrFwd);
+          }
+          else {
+            chassis.stop();
+            state = kReleaseSpent;
+          }
+          break;
+
+      case kReleaseSpent:
+          static unsigned int timeToStop3 = millis();
+          if (millis() > timeToStop3 + 1000) {
+              state = kBackUpStorage;
+            }
+          else {
+              
+          }
+          break;
+
           default:
           Serial.print("ERROR");
           //make LED flash for visual indication

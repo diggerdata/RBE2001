@@ -30,13 +30,36 @@ static const unsigned char ledpindebug = 13;
 static const unsigned char linesensorArray [8] = {A0, A2, A3, A4, A5, A6, A7, A8};
 
 enum States {
-  kDriveToReactorInitial,
+  kDriveToReactorInitial, //Robot starts the process of extracting spent rod
   kArmDownInitial,
   kCloseGripInitial,
   kArmUpInitial,
   kBackUpInitial,
   kDriveToLine,
-  kTurnAroundInitial
+  kTurnAroundInitial,
+  kDriveToLineInitial,
+  kStopAfterLineInitial,  //from here, begin storing the spent rod
+  kTurnToStorageInitial,
+  kDriveToStorage,
+  kReleaseSpent,
+  kBackUpStorage,
+  kTurnFromStorage,
+  kDriveFromStorage,
+  kTurnToReactor,
+  kDriveToReactorStr, //drives off of horizontal lines, then begin getting supply
+  kTurnAroundToSupply,
+  kDriveToLineStr,
+  kTurnToStorageSecondary,
+  kDriveToSupply,
+  kGrabSupply,
+  kBackUpSupply,
+  kTurnFromSupply,
+  kDriveFromSupply,
+  kTurnToReactorSply,
+  kDriveToReactorSply,
+  kLowerNewRod,
+  kReleaseNewRod,
+  kArmUpFinal
 };
 
 enum Bits {
