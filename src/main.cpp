@@ -6,9 +6,7 @@
 #include "Arm.h"
 #include "Linesensor.h"
 
-#include "EncoderRight.c"
-#include "EncoderLeft.c"
-
+// #include "EncoderRight.c"
 
 Messages msg;
 unsigned long timeForHeartbeat;
@@ -24,15 +22,15 @@ void setup() {
   Serial.begin(9600); // Serial output begin
 
 
-  pinMode(c_LeftEncoderPinA, INPUT_PULLUP);      // sets pin A as input
-  pinMode(c_LeftEncoderPinB, INPUT_PULLUP);      // sets pin B as input
-  attachInterrupt(c_LeftEncoderInterruptA, HandleLeftMotorInterruptA, CHANGE);
-  attachInterrupt(c_LeftEncoderInterruptB, HandleLeftMotorInterruptB, CHANGE);
-
-  pinMode(c_RightEncoderPinA, INPUT_PULLUP);      // sets pin A as input
-  pinMode(c_RightEncoderPinB, INPUT_PULLUP);      // sets pin B as input
-  attachInterrupt(c_RightEncoderInterruptA, HandleRightMotorInterruptA, CHANGE);
-  attachInterrupt(c_RightEncoderInterruptB, HandleRightMotorInterruptB, CHANGE);
+  // pinMode(c_LeftEncoderPinA, INPUT_PULLUP);      // sets pin A as input
+  // pinMode(c_LeftEncoderPinB, INPUT_PULLUP);      // sets pin B as input
+  // attachInterrupt(c_LeftEncoderInterruptA, HandleLeftMotorInterruptA, CHANGE);
+  // attachInterrupt(c_LeftEncoderInterruptB, HandleLeftMotorInterruptB, CHANGE);
+  //
+  // pinMode(c_RightEncoderPinA, INPUT_PULLUP);      // sets pin A as input
+  // pinMode(c_RightEncoderPinB, INPUT_PULLUP);      // sets pin B as input
+  // attachInterrupt(c_RightEncoderInterruptA, HandleRightMotorInterruptA, CHANGE);
+  // attachInterrupt(c_RightEncoderInterruptB, HandleRightMotorInterruptB, CHANGE);
 
 
   Serial.println("Starting");
@@ -59,7 +57,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
 
       break;
       case kGetNewRod:
-      
+
       break;
       case kReplaceRod:
 
@@ -71,6 +69,11 @@ void auton () { // auton by task number. Everything passed the commented out blo
 }
 
 void update () { // update method. Call this to excecute stored states
+
+
+    // getEncTicksLeft();
+    // getEncTicksRight();
+
     if (msg.isStopped()) {
         chassis.instantStop();
         arm.instantStop();

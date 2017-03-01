@@ -1,3 +1,6 @@
+#ifndef DWF_H_
+#define DWF_H_
+
 #if !defined(digitalPinToPortReg)
 #if !(defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) )
 
@@ -123,7 +126,7 @@ if (__builtin_constant_p(P) && __builtin_constant_p(V)) { \
                 bitWrite(*digitalPinToDDRReg(P), digitalPinToBit(P), (V)); \
         } else {  \
                 pinMode((P), (V)); \
-        } 
+        }
 #endif
 
 #if !defined(digitalReadFast)
@@ -154,7 +157,7 @@ if (__builtin_constant_p(P) && __builtin_constant_p(V)) { \
                 bitWrite(*digitalPinToDDRReg(P), digitalPinToBit(P), (V)); \
         } else {  \
                 pinMode((P), (V)); \
-        } 
+        }
 #endif
 
 #if !defined(digitalReadFast2)
@@ -163,4 +166,6 @@ if (__builtin_constant_p(P) && __builtin_constant_p(V)) { \
 (__builtin_constant_p(P) ) ? ( \
                 ( bitRead(*digitalPinToPINReg(P), digitalPinToBit(P))) ) : \
                 digitalRead((P))
+#endif
+
 #endif

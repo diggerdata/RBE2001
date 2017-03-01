@@ -1,9 +1,12 @@
+
+#ifndef ENCL_H_
+#define ENCL_H_
 /*
 *adapted from http://yameb.blogspot.com/2012/11/quadrature-encoders-in-arduino-done.html
 *Quadrature Decoder
 */
 #include "Arduino.h"
-#include <digitalWriteFast.h>  // library for high performance reads and writes by jrraines
+// #include <digitalWriteFast.h>  // library for high performance reads and writes by jrraines
                                // see http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1267553811/0
                                // and http://code.google.com/p/digitalwritefast/
 
@@ -42,6 +45,7 @@ int ParseEncoderLeft(){
     if(_LeftEncoderASet && _LeftEncoderBSet) return 1;
     if(!_LeftEncoderASet && !_LeftEncoderBSet) return -1;
   }
+
 }
 
 long getEncTicksLeft()
@@ -52,8 +56,8 @@ long getEncTicksLeft()
 
 // Interrupt service routines for the Left motor's quadrature encoder
 void HandleLeftMotorInterruptA(){
-  _LeftEncoderBSet = digitalReadFast(c_LeftEncoderPinB);
-  _LeftEncoderASet = digitalReadFast(c_LeftEncoderPinA);
+  _LeftEncoderBSet = digitalRead(c_LeftEncoderPinB);
+  _LeftEncoderASet = digitalRead(c_LeftEncoderPinA);
 
   _LeftEncoderTicks+=ParseEncoderLeft();
 
@@ -64,11 +68,14 @@ void HandleLeftMotorInterruptA(){
 // Interrupt service routines for the Left motor's quadrature encoder
 void HandleLeftMotorInterruptB(){
   // Test transition;
-  _LeftEncoderBSet = digitalReadFast(c_LeftEncoderPinB);
-  _LeftEncoderASet = digitalReadFast(c_LeftEncoderPinA);
+  _LeftEncoderBSet = digitalRead(c_LeftEncoderPinB);
+  _LeftEncoderASet = digitalRead(c_LeftEncoderPinA);
 
   _LeftEncoderTicks+=ParseEncoderLeft();
 
   _LeftEncoderAPrev = _LeftEncoderASet;
   _LeftEncoderBPrev = _LeftEncoderBSet;
 }
+
+
+#endif
