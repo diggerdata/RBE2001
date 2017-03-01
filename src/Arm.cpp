@@ -51,11 +51,11 @@ void Arm::set (int pos) { //set arm to a point
     armSetPoint = pos;
 }
 
-int Arm::pid () {
+int Arm::pid () { //default pid overload
     return pid(armSetPoint, armCurrentPoint);
 }
 
-int Arm::pid (int setpoint, int currentpoint) {
+int Arm::pid (int setpoint, int currentpoint) { //fix
   // int error = setpoint - currentpoint;
   // int inttime = millis() - lastTime;
   // int lasterror = error;
@@ -64,11 +64,11 @@ int Arm::pid (int setpoint, int currentpoint) {
 
   return 0;
 }
-void Arm::openGrip() {
+void Arm::openGrip() { //open grip
     gripPos = 0;
 }
 
-void Arm::closeGrip() {
+void Arm::closeGrip() { //close grip
     gripPos = 180;
 }
 
