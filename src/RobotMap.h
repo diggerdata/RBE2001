@@ -46,10 +46,11 @@ enum States {
   kTurnFromStorage,
   kDriveFromStorage,
   kStopAfterLineStorage,
-  kTurnToReactor,
+  kTurnToReactorStr,
   kDriveToReactorStr, //drives off of horizontal lines, then begin getting supply
   kTurnAroundToSupply,
-  kDriveToLineStr,
+  kDriveToLineSply,
+  kStopPastLineSply,
   kTurnToStorageSecondary,
   kDriveToSupply,
   kGrabSupply,
