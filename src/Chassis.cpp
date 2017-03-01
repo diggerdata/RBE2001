@@ -27,10 +27,6 @@ void Chassis::attach(unsigned char leftMotorFwd, unsigned char leftMotorRwd, uns
 
 }
 
-void Chassis::attachEnc(unsigned char leftEncA, unsigned char leftEncB, unsigned char rightEncA, unsigned char rightEncB) {
-    
-}
-
 
 void Chassis::stop () { //stop
     speedState = 0;
