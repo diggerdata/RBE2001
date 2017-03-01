@@ -61,11 +61,11 @@ int Arm::pid (int setpoint, int currentpoint) {
   return 0;
 }
 void Arm::openGrip() {
-    gripServo.write(0);
+    gripPos = 0;
 }
 
 void Arm::closeGrip() {
-    gripServo.write(180);
+    gripPos = 180;
 }
 
 void Arm::update() {
@@ -73,4 +73,5 @@ void Arm::update() {
     // Serial.print("ARM POT: ");
     // Serial.println((int) armCurrentPoint);
     armMotor.write(90 + pid());
+    gripServo.write(gripPos);
 }
