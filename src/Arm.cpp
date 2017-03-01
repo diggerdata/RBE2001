@@ -60,6 +60,13 @@ int Arm::pid (int setpoint, int currentpoint) {
 
   return 0;
 }
+void Arm::openGrip() {
+    gripServo.write(0);
+}
+
+void Arm::closeGrip() {
+    gripServo.write(180);
+}
 
 void Arm::update() {
     updatePot();

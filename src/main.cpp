@@ -45,13 +45,28 @@ void setup() {
   arm.instantStop();
   linesensor.init();
 
+  arm.openGrip();
 }
 
 void auton () { // auton by task number. Everything passed the commented out block is untested
     chassis.drive(0, 0);
     switch (state) {
       case kExtractRod:
-    //  if()
+      if(true /*robot is on a line*/) {
+        while(true/*limit switch is not pressed*/)  //WILL need some kind of fail safe, could drive forever rn
+            chassis.drive(mtrFwd);  //drive forward until limit switch is pressed
+        chassis.stop(); //may need some delay before stopping
+        arm.openGrip(); //just making sure
+        arm.setLow();
+        //some delay
+        arm.closeGrip();
+        //some delay
+        arm.setHigh();
+        //some delay
+        
+
+      }
+
       break;
       case kStoreRod:
 
@@ -90,6 +105,7 @@ signed char turn () { //code to turn. 0= line detected 1= no line
 
   if ((sensorValue | 0b00000000) == 0b11111111) {
       chassis.drive(0, 0);
+      tubeLinesCrossed++;
   }
 
   if ((sensorValue | 0b00011000) == 0b11111111) {

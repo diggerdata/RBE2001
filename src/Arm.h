@@ -26,6 +26,8 @@ class Arm {
         void update();
         void stop();
         void instantStop();
+        void openGrip();
+        void closeGrip();
 
     private:
 
