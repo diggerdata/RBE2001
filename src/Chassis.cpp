@@ -11,7 +11,7 @@
 
 Chassis::Chassis(){}
 
-void Chassis::attach(unsigned char leftMotorFwd, unsigned char rightMotorFwd, unsigned char leftMotorRwd, unsigned char rightMotorRwd) {
+void Chassis::attach(unsigned char leftMotorFwd, unsigned char leftMotorRwd, unsigned char rightMotorFwd, unsigned char rightMotorRwd) {
     driveLF =  leftMotorFwd;
     driveRF = rightMotorFwd;
     driveLR =  leftMotorRwd;
@@ -26,6 +26,11 @@ void Chassis::attach(unsigned char leftMotorFwd, unsigned char rightMotorFwd, un
     pinMode(driveRR, OUTPUT);
 
 }
+
+void Chassis::attachEnc(unsigned char leftEncA, unsigned char leftEncB, unsigned char rightEncA, unsigned char rightEncB) {
+    
+}
+
 
 void Chassis::stop () { //stop
     speedState = 0;

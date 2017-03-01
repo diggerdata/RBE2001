@@ -17,7 +17,8 @@
 class Chassis {
     public:
         Chassis();
-        void attach(unsigned char leftMotorFwd, unsigned char rightMotorFwd, unsigned char leftMotorRwd, unsigned char rightMotorRwd);
+        void attach(unsigned char leftMotorFwd, unsigned char leftMotorRwd, unsigned char rightMotorFwd, unsigned char rightMotorRwd);
+        void attachEnc(unsigned char leftEncA, unsigned char leftEncB, unsigned char rightEncA, unsigned char rightEncB);
         void drive(signed char speed, signed char turn);
         void update();
         void stop();
@@ -26,12 +27,22 @@ class Chassis {
         void turn(signed char turn);
 
     private:
+
+        void LeftLeftEncoderISR();
+        void RightEncoderISR();
+
         signed char speedState = 0;
         signed char turnState = 0;
-        unsigned char driveLF;       // create servo object to control left drive motor
-        unsigned char driveRF;       // create servo object to control right drive motor
-        unsigned char driveLR;       // create servo object to control left drive motor
-        unsigned char driveRR;       // create servo object to control right drive motor
+
+        unsigned char driveLF;       // create char to map left drive motor
+        unsigned char driveRF;       // create char to map right drive motor
+        unsigned char driveLR;       // create char to map left drive motor
+        unsigned char driveRR;       // create char to map right drive motor
+
+        unsigned char encLA;       // create char to map left encoder
+        unsigned char encLB;       // create char to map right encoder
+        unsigned char encRA;       // create char to map left encoder
+        unsigned char encRB;       // create char to map right encoder
 
 
 

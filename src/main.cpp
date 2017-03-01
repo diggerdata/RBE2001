@@ -6,6 +6,8 @@
 #include "Arm.h"
 #include "Linesensor.h"
 
+#include "EncoderRight.c"
+#include "EncoderLeft.c"
 
 
 Messages msg;
@@ -21,12 +23,24 @@ void setup() {
 
   Serial.begin(9600); // Serial output begin
 
+
+  pinMode(c_LeftEncoderPinA, INPUT_PULLUP);      // sets pin A as input
+  pinMode(c_LeftEncoderPinB, INPUT_PULLUP);      // sets pin B as input
+  attachInterrupt(c_LeftEncoderInterruptA, HandleLeftMotorInterruptA, CHANGE);
+  attachInterrupt(c_LeftEncoderInterruptB, HandleLeftMotorInterruptB, CHANGE);
+
+  pinMode(c_RightEncoderPinA, INPUT_PULLUP);      // sets pin A as input
+  pinMode(c_RightEncoderPinB, INPUT_PULLUP);      // sets pin B as input
+  attachInterrupt(c_RightEncoderInterruptA, HandleRightMotorInterruptA, CHANGE);
+  attachInterrupt(c_RightEncoderInterruptB, HandleRightMotorInterruptB, CHANGE);
+
+
   Serial.println("Starting");
   msg.setup();
   timeForHeartbeat = millis() + 1000;
   timeForPush = millis() + 100;
 
-  chassis.attach(mtrLF, mtrRF, mtrLR, mtrRR);
+  chassis.attach(mtrLF, mtrLR, mtrRF, mtrRR);
   arm.attach(mtrArm, potArm, srvClmp);
 
   chassis.instantStop();
