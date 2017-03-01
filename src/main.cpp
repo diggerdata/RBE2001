@@ -51,6 +51,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
     chassis.drive(0, 0);
     switch (state) {
       case kExtractRod:
+    //  if()
       break;
       case kStoreRod:
 
