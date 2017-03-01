@@ -12,6 +12,7 @@ Messages msg;
 unsigned long timeForHeartbeat;
 unsigned long timeForPush;
 
+volatile unsigned int tubeLinesCrossed = 0;
 
 Linesensor linesensor;
 Chassis chassis;
@@ -190,7 +191,7 @@ void loop() {
   if (millis() > timeForHeartbeat) {
     timeForHeartbeat = millis() + 1000;
     msg.sendHeartbeat();
-    // Serial.println("heartbeat");
+    Serial.println("heartbeat");
   }
   if (millis() > timeForPush) {
     timeForPush = millis() + 100;
