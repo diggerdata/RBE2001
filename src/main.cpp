@@ -48,6 +48,28 @@ void setup() {
   arm.openGrip();
 }
 
+signed char turn () { //code to turn. 0= line detected 1= no line
+  char sensorValue = linesensor.getArray();
+
+  if ((sensorValue | 0b00000000) == 0b11111111) {
+      chassis.drive(0, 0);
+  }
+
+  if ((sensorValue | 0b00011000) == 0b11111111) {
+      chassis.turn(0);
+  }
+
+  if ((sensorValue | 0b11100000) == 0b11111111) {
+      chassis.turn(20);
+  }
+
+  if ((sensorValue | 0b00000111) == 0b11111111) {
+      chassis.turn(-20);
+  }
+
+  return 0;
+}
+
 void auton () { // auton by task number. Everything passed the commented out block is untested
     chassis.drive(0, 0);
     Serial.print("Current state: ");
@@ -129,6 +151,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
             static unsigned int timeToStop2 = millis();
             if (millis() > timeToStop2 + 1000) {
                 state = kTurnToStorageInitial;
+                chassis.stop();
               }
               else{
                 chassis.drive(mtrFwd);
@@ -198,7 +221,82 @@ void auton () { // auton by task number. Everything passed the commented out blo
           }
           break;
 
-      case kStopAfterLineStorage: 
+      case kStopAfterLineStorage:
+          Serial.println("kStopAfterLineInitial");
+          static unsigned int timeToStop5 = millis();
+          if (millis() > timeToStop5 + 1000) {
+              state = kTurnToReactorStr;
+              chassis.stop();
+            }
+            else{
+              chassis.drive(mtrFwd);
+            }
+            break;
+
+        case kTurnToReactorStr:
+            if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
+              chassis.stop();
+              state = kDriveToStorage;
+            }
+            else {
+              chassis.turn(-50);
+            }
+            break;
+
+        case kDriveToReactorStr:
+            Serial.println("kDriveToReactorStr");
+            static unsigned int timeToStop6 = millis();
+            if (millis() > timeToStop6 + 1000) {
+                state = kTurnAroundToSupply;
+                chassis.stop();
+              }
+              else{
+                chassis.drive(mtrFwd);
+              }
+              break;
+
+        case kTurnAroundToSupply:
+              if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
+                chassis.stop();
+                state = kDriveToLineSply;
+              }
+              else {
+                chassis.turn(50);
+                turn();
+              }
+              break;
+
+        case kDriveToLineSply:
+              if(linesensor.getArray() == 0) {
+                  state = kStopPastLineSply;
+                    }
+              else {
+                chassis.drive(mtrFwd);
+              }
+              break;
+
+        case kStopPastLineSply:
+            static unsigned int timeToStop7 = millis();
+            if (millis() > timeToStop7 + 1000) {
+                state = kTurnToStorageSecondary;
+                chassis.stop();
+              }
+              else{
+                chassis.drive(mtrFwd);
+              }
+              break;
+
+        case kTurnToStorageSecondary:
+            if(linesensor.getArray() || !(BIT3 && BIT4) == !(BIT3 && BIT4)) {
+              chassis.stop();
+              state = kDriveToSupply;
+            }
+            else {
+              chassis.turn(-50);
+              turn();
+            }
+            break;
+
           default:
           Serial.print("ERROR");
           //make LED flash for visual indication
@@ -224,27 +322,7 @@ void update () { // update method. Call this to excecute stored states
 
 }
 
-signed char turn () { //code to turn. 0= line detected 1= no line
-  char sensorValue = linesensor.getArray();
 
-  if ((sensorValue | 0b00000000) == 0b11111111) {
-      chassis.drive(0, 0);
-  }
-
-  if ((sensorValue | 0b00011000) == 0b11111111) {
-      chassis.turn(0);
-  }
-
-  if ((sensorValue | 0b11100000) == 0b11111111) {
-      chassis.turn(20);
-  }
-
-  if ((sensorValue | 0b00000111) == 0b11111111) {
-      chassis.turn(-20);
-  }
-
-  return 0;
-}
 
 //////////////////////////////////////////////
 // Stuff that shouldn't be touched too hard //
