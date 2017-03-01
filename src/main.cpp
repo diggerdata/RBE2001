@@ -98,9 +98,15 @@ void auton () { // auton by task number. Everything passed the commented out blo
 
       case kArmDownInitial:
           Serial.println("kArmDownInitial");
-          if(arm.getPot() <= 620) {
-            state = kCloseGripInitial;
+          // if(arm.getPot() <= 680) {
+          //   state = kCloseGripInitial;
+          // }
+          static unsigned int lastTime1 = millis();
+          // arm.closeGrip();
+          if (millis() > lastTime1 + 1000) {
+              state = kCloseGripInitial;
           }
+
           else {
             arm.setLow();
           }
@@ -110,25 +116,24 @@ void auton () { // auton by task number. Everything passed the commented out blo
           Serial.println("kCloseGripInitial");
           static unsigned int lastTime = millis();
           arm.closeGrip();
-          if (millis() > lastTime + 5000) {
+          if (millis() > lastTime + 1000) {
               state = kArmUpInitial;
           }
           break;
 
       case kArmUpInitial:
           Serial.println("kArmUpInitial");
-          if(arm.getPot() >= 850) {
-            state = kBackUpInitial;
-          }
-          else {
-            arm.setHigh();
+          static unsigned int lastTime2 = millis();
+          arm.setHigh();
+          if (millis() > lastTime2 + 1000) {
+              state = kBackUpInitial;
           }
           break;
 
       case kBackUpInitial:
         Serial.println("kBackUpInitial");
         static unsigned int timeToStop1 = millis();
-        if (millis() > timeToStop1 + 1000) {
+        if (millis() > timeToStop1 + 5000) {
             state = kTurnAroundInitial;
           }
         else {
@@ -151,7 +156,7 @@ void auton () { // auton by task number. Everything passed the commented out blo
           Serial.println("kDriveToLineInitial");
           if(linesensor.getArray() == 0) {
               state = kStopAfterLineInitial;
-                }
+          }
           else {
             chassis.drive(mtrFwd);
             turn();

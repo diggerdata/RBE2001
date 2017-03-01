@@ -10,6 +10,7 @@
 #include <Servo.h>
 
 static const float kp = 1, ki = 0, kd = 0;
+Servo gripServo;
 
 Arm::Arm() {}
 
@@ -17,11 +18,13 @@ void Arm::attach (unsigned char armMotorPort, unsigned char potPort, unsigned ch
     pot = potPort;
 
     pinMode(potPort, INPUT_PULLUP);
+    pinMode(gripServoPort, OUTPUT);
+
 
     armSetPoint = HIGHPOS;
-
+    gripPos = 180;
     armMotor.attach(armMotorPort, 1000, 2000);
-    gripServo.attach(gripServoPort, 1000, 2000);
+    gripServo.attach(gripServoPort);
 }
 
 void Arm::setHigh () { //set arm high
@@ -66,11 +69,11 @@ int Arm::pid (int setpoint, int currentpoint) { //fixg
   // return 0;
 }
 void Arm::openGrip() { //open grip
-    gripPos = 0;
+    gripPos = 30;
 }
 
 void Arm::closeGrip() { //close grip
-    gripPos = 180;
+    gripPos = 150;
 }
 
 void Arm::update() {

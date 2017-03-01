@@ -15,7 +15,7 @@ static const unsigned char mtrRF =  8;
 static const unsigned char mtrRR =  9;
 
 static const unsigned char mtrArm = 5;
-static const unsigned char srvClmp = 4;
+static const unsigned char srvClmp = 3;
 static const unsigned char potArm = A1;
 
 static const unsigned char frontSwitch = 22;
