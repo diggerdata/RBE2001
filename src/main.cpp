@@ -197,6 +197,8 @@ void auton () { // auton by task number. Everything passed the commented out blo
             chassis.drive(mtrFwd);
           }
           break;
+
+      case kStopAfterLineStorage: 
           default:
           Serial.print("ERROR");
           //make LED flash for visual indication
