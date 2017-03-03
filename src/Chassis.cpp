@@ -28,8 +28,8 @@ void Chassis::attach(unsigned char leftMotorFwd, unsigned char leftMotorRwd, uns
 }
 
 void Chassis::attachLimit (unsigned char port) {
-limitPort = port;
-  limitState = 1;
+    limitPort = port;
+    limitState = 1;
     pinMode(limitPort, INPUT_PULLUP);
 }
 
