@@ -42,7 +42,7 @@ class Arm {
         int pid ();
 
         signed char armSpeed = 0;       //arm speed variable
-        signed char gripPos = 0;        //grip pos variable
+        unsigned char gripPos = 0;        //grip pos variable
 
         unsigned short armSetPoint = 0;     //arm pid
         unsigned short armCurrentPoint = 0; //arm pid
@@ -52,7 +52,7 @@ class Arm {
         float lasterror = 0;
 
         Servo armMotor;       // create servo object to control arm motor
-        Servo gripServo;       // create servo object to control grip servo
+        // Servo gripServo;       // create servo object to control grip servo
 
 };
 

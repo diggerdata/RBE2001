@@ -83,10 +83,10 @@ void Chassis::update() {
         currRightSpeed = speedState - turnState;
     }
 
-    // Serial.print("MOTOR LEFT : ");
-    // Serial.println(currLeftSpeed);
-    // Serial.print("MOTOR RIGHT: ");
-    // Serial.println(currRightSpeed);
+    Serial.print("MOTOR LEFT : ");
+    Serial.println(currLeftSpeed);
+    Serial.print("MOTOR RIGHT: ");
+    Serial.println(currRightSpeed);
 
     limitState = digitalRead(limitPort);
 
