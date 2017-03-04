@@ -59,14 +59,12 @@ int Arm::pid () { //default pid overload
     return pid(armSetPoint, armCurrentPoint);
 }
 
-int Arm::pid (int setpoint, int currentpoint) { //fixg
-  int error = - setpoint + currentpoint;
-  int inttime = millis() - lastTime;
-  int lasterror = error;
+int Arm::pid (int setpoint, int currentpoint) {
+    int error = - setpoint + currentpoint;
+    int inttime = millis() - lastTime;
+    int lasterror = error;
 
-  return (kp * error) + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
-
-  // return 0;
+    return (kp * error) + (ki * (integral += (error * inttime))) + (kd * (error-lasterror));
 }
 void Arm::openGrip() { //open grip
     gripPos = 30;

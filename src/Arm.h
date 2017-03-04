@@ -52,7 +52,7 @@ class Arm {
         float lasterror = 0;
 
         Servo armMotor;       // create servo object to control arm motor
-        // Servo gripServo;       // create servo object to control grip servo
+        Servo gripServo;       // create servo object to control grip servo
 
 };
 
